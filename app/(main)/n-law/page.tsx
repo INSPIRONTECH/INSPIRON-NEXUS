@@ -118,6 +118,61 @@ const VelocityChart = () => {
     return <Line data={data} options={options} />;
 };
 
+const SimulationLab = () => {
+    const [bgMode, setBgMode] = useState<'blueprint' | 'dark' | 'light'>('blueprint');
+    const [scale, setScale] = useState(1);
+
+    return (
+        <div className="w-full max-w-5xl mx-auto bg-black/30 rounded-[3rem] border border-white/10 overflow-hidden backdrop-blur-sm shadow-2xl">
+            {/* Toolbar */}
+            <div className="flex flex-col md:flex-row items-center justify-between p-6 border-b border-white/5 gap-6">
+                <div className="flex gap-2 bg-white/5 p-1 rounded-full">
+                    {['blueprint', 'dark', 'light'].map((mode) => (
+                        <button
+                            key={mode}
+                            onClick={() => setBgMode(mode as any)}
+                            className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all ${bgMode === mode ? 'bg-[#00D2FF] text-[#002147] shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                        >
+                            {mode}
+                        </button>
+                    ))}
+                </div>
+                <div className="flex items-center gap-4 bg-white/5 px-6 py-2 rounded-full border border-white/5">
+                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Scale Output</span>
+                    <input
+                        type="range"
+                        min="0.5"
+                        max="1.5"
+                        step="0.1"
+                        value={scale}
+                        onChange={(e) => setScale(parseFloat(e.target.value))}
+                        className="w-32 h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#FFD700] cursor-pointer"
+                    />
+                </div>
+            </div>
+
+            {/* Viewport */}
+            <div className={`relative h-[500px] flex items-center justify-center transition-colors duration-500 ${bgMode === 'light' ? 'bg-slate-100' : bgMode === 'dark' ? 'bg-[#00152e]' : 'bg-[#002147]'}`}>
+                {bgMode === 'blueprint' && <div className="absolute inset-0 blueprint-grid opacity-20"></div>}
+
+                <div style={{ transform: `scale(${scale})` }} className="transition-transform duration-300 relative z-10">
+                    <div className={`w-64 h-64 ${bgMode === 'light' ? 'text-[#002147]' : 'text-[#00D2FF]'} transition-colors duration-500`}>
+                        <MasterLockup />
+                    </div>
+                </div>
+
+                {/* Metrics Overlay */}
+                <div className="absolute bottom-6 left-6 font-mono text-[10px] text-slate-500 space-y-1 pointer-events-none select-none z-20">
+                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div> SYSTEM_ACTIVE</div>
+                    <div>RENDER_MODE: {bgMode.toUpperCase()}</div>
+                    <div>SCALE_FACTOR: {scale.toFixed(2)}x</div>
+                    <div>VECTOR_INTEGRITY: 100%</div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default function NLawStandards() {
     const [isAuditing, setIsAuditing] = useState(false);
     const [showToast, setShowToast] = useState(false);
@@ -194,6 +249,13 @@ export default function NLawStandards() {
             </div>
 
             <main className="pb-32">
+
+                {/* BACK TO HOME */}
+                <div className="pt-24 px-10">
+                    <Link href="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00D2FF] transition text-sm">
+                        <ArrowLeft size={14} /> Back to Home
+                    </Link>
+                </div>
 
                 {/* 00. INTRO SECTION: BRAND VISION */}
                 <section id="vision" className="pt-48 pb-32 px-10 text-center max-w-6xl mx-auto space-y-8 bg-[#010409] blueprint-grid border-b border-white/5 rounded-b-[4rem] shadow-sm relative overflow-hidden">
@@ -527,6 +589,23 @@ export default function NLawStandards() {
                 </section>
 
 
+                {/* 03. LIVE SIMULATION LAB */}
+                <section id="simulation" className="py-40 bg-[#010409] relative overflow-hidden border-y border-white/5">
+                    <div className="absolute inset-0 blueprint-grid opacity-5"></div>
+                    <div className="max-w-6xl mx-auto px-10 space-y-20 relative z-20">
+                        <div className="text-center space-y-4 max-w-2xl mx-auto">
+                            <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">03. Simulation Lab</h2>
+                            <p className="text-slate-400 text-lg md:text-xl font-light leading-relaxed">
+                                Live testing environment. Switch rendering contexts to verify the logo&apos;s structural integrity across different deployment scenarios.
+                            </p>
+                        </div>
+
+                        {/* SIMULATION CONTROLS + PREVIEW */}
+                        <SimulationLab />
+                    </div>
+                </section>
+
+
                 {/* 04. PRODUCTION ASSET EXPORT */}
                 <section className="py-40 bg-[#010409] relative overflow-hidden border-t border-white/5">
                     <div className="absolute inset-0 blueprint-grid opacity-10"></div>
@@ -594,16 +673,34 @@ export default function NLawStandards() {
                 </section>
             </main>
 
-            {/* INSTITUTIONAL FOOTER */}
-            <footer className="py-32 bg-white px-12 border-t border-slate-100 flex flex-col items-center space-y-16">
-                <div className="flex items-center gap-6">
-                    <div className="w-16 h-16 text-[#00D2FF]"><MasterLockup /></div>
-                    <div className="w-48 h-px bg-[#FFD700]/30"></div>
-                    <span className="text-[12px] font-bold uppercase tracking-[0.8em] text-slate-700">Production Signature Verified</span>
-                </div>
-                <div className="text-center space-y-4">
-                    <p className="text-[#002147] font-black text-5xl tracking-tighter uppercase leading-none">Architected by MD ABU HASAN</p>
-                    <p className="text-slate-400 text-sm font-bold uppercase tracking-[0.5em]">&copy; 2026 Inspiron Tech BD // Mission Control Protocol v2.1</p>
+            {/* SITE FOOTER */}
+            <footer className="py-16 border-t border-white/5 px-8 bg-[#010409]">
+                <div className="max-w-6xl mx-auto">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+                        <div className="text-center md:text-left">
+                            <p className="text-gray-400 font-light">
+                                <span className="text-[#FFD700] font-bold">MD ABU HASAN</span> · Founder, INSPIRON TECH
+                            </p>
+                            <p className="text-gray-600 text-sm mt-1">
+                                Official Manager.io Partner · Dhaka 1217, Bangladesh
+                            </p>
+                        </div>
+                        <div className="flex gap-6 text-[10px] font-black uppercase tracking-widest text-gray-600">
+                            <Link href="/" className="hover:text-[#00D2FF] transition-colors">Home</Link>
+                            <Link href="/services" className="hover:text-[#00D2FF] transition-colors">Services</Link>
+                            <Link href="/case-studies" className="hover:text-[#00D2FF] transition-colors">Case Studies</Link>
+                            <Link href="/pricing" className="hover:text-[#00D2FF] transition-colors">Pricing</Link>
+                            <Link href="/contact" className="hover:text-[#00D2FF] transition-colors">Contact</Link>
+                            <Link href="/privacy" className="hover:text-[#00D2FF] transition-colors">Privacy</Link>
+                        </div>
+                    </div>
+                    <div className="mt-8 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-gray-600 text-xs">© 2026 Inspiron Tech BD</p>
+                        <div className="flex gap-4">
+                            <a href="https://www.upwork.com/freelancers/~011085e2a7cde3f437?viewMode=1" target="_blank" rel="noopener noreferrer" className="text-[#00D2FF] text-sm hover:underline">Verify on Upwork ↗</a>
+                            <a href="https://www.manager.io/advisors" target="_blank" rel="noopener noreferrer" className="text-[#FFD700] text-sm hover:underline">Verify on Manager.io ↗</a>
+                        </div>
+                    </div>
                 </div>
             </footer>
         </div >

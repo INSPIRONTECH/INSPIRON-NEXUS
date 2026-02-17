@@ -15,11 +15,11 @@ export default function ContactPage() {
                 <div className="text-center mb-20">
                     <div className="inline-flex items-center gap-2 bg-action-gold/10 border border-action-gold/30 px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-action-gold mb-8">
                         <Shield size={14} />
-                        Direct Commander Access
+                        Get In Touch
                     </div>
 
                     <h1 className="font-institutional text-5xl md:text-7xl font-medium text-institutional-white uppercase tracking-tighter leading-[0.9] mb-6">
-                        Contact <span className="text-action-gold">Command</span>
+                        Contact <span className="text-action-gold">Us</span>
                     </h1>
 
                     <p className="font-institutional text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light">
@@ -32,14 +32,14 @@ export default function ContactPage() {
                     <div className="space-y-8">
                         <div className="bg-white/5 border-2 border-action-gold/30 rounded-3xl p-10">
                             <h2 className="font-institutional text-3xl font-bold text-action-gold uppercase mb-8">
-                                Commander Contact
+                                Direct Contact
                             </h2>
 
                             <div className="space-y-6">
                                 {/* Name */}
                                 <div>
                                     <div className="text-sm text-gray-500 uppercase tracking-wider mb-2">
-                                        Authority
+                                        Founder
                                     </div>
                                     <div className="text-2xl font-bold text-institutional-white">
                                         MD ABU HASAN
@@ -150,11 +150,11 @@ export default function ContactPage() {
                                 </a>
 
                                 <a
-                                    href="https://wa.me/8801719300849?text=Inquiry: AquaSmart IoT Solution"
+                                    href="https://wa.me/8801719300849?text=Inquiry: Custom Dashboard Solution"
                                     className="w-full flex items-center justify-center gap-3 bg-electric-cyan text-deep-navy-black px-8 py-5 rounded-xl font-black uppercase text-sm tracking-widest hover:bg-electric-cyan/90 transition active:scale-95"
                                 >
                                     <MessageSquareCode size={20} />
-                                    AquaSmart IoT Solution
+                                    Custom Dashboard Solution
                                 </a>
 
                                 <a

@@ -1,7 +1,6 @@
 /**
- * INSTITUTIONAL HERO - CORE_MISSION-CONTROL-WEB V2.0
- * Commander: MD ABU HASAN
- * Architect: 3-Star General Claude Sonnet 4.5 TH
+ * HERO SECTION — INSPIRON TECH
+ * Real credentials. Plain language. No jargon.
  */
 
 'use client';
@@ -13,59 +12,72 @@ import Link from 'next/link';
 export const InstitutionalHero = () => {
     return (
         <section className="relative min-h-screen flex flex-col justify-center items-center bg-deep-navy-black overflow-hidden px-6">
-            {/* Structural Tech Grid */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#00ffff_1px,transparent_1px)] [background-size:40px_40px]"></div>
+            {/* Subtle background grid */}
+            <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(#00D2FF_1px,transparent_1px)] [background-size:40px_40px]"></div>
 
             <div className="relative z-10 text-center max-w-5xl">
-                {/* Dual Authority Badges */}
+                {/* Trust Badges */}
                 <div className="relative z-20 flex flex-col md:flex-row gap-4 justify-center mb-10">
-                    {/* Meta Verified Badge */}
-                    <div className="flex items-center gap-2 bg-electric-cyan/10 border border-electric-cyan/30 px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-electric-cyan">
-                        <ShieldCheck size={14} className="text-electric-cyan" />
-                        Meta Verified: 1372121971105461
-                    </div>
-
-                    {/* Manager.io Partner Badge */}
-                    <div className="flex items-center gap-2 bg-action-gold/10 border border-action-gold/30 px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-action-gold">
+                    {/* Manager.io Official Partner */}
+                    <a
+                        href="https://www.manager.io/advisors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 bg-action-gold/10 border border-action-gold/30 px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-action-gold hover:bg-action-gold/20 transition"
+                    >
                         <BadgeCheck size={14} className="text-action-gold" />
                         Official Manager.io Partner
-                    </div>
-                </div>
-
-                {/* Institutional Headline */}
-                <h1 className="font-institutional text-5xl md:text-8xl font-medium text-institutional-white uppercase tracking-tighter leading-[0.9] mb-8">
-                    Official Manager.io<br />
-                    Partner <span className="text-action-gold">Bangladesh</span>
-                </h1>
-
-                {/* Mission Statement */}
-                <p className="font-institutional text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-14 leading-relaxed font-light">
-                    Institutional Cloud Accounting & Business Automation for 100+ Crore Agro-Enterprises
-                </p>
-
-                {/* Dual CTAs */}
-                <div className="flex flex-col md:flex-row gap-6 justify-center">
-                    {/* Primary CTA - Gold Racer */}
-                    <a
-                        href="https://wa.me/8801719300849"
-                        className="flex items-center justify-center gap-3 gold-racer haptic-button px-10 py-5 rounded-2xl uppercase tracking-widest text-sm shadow-2xl"
-                    >
-                        <MessageSquareCode size={22} /> Start Technical Audit
                     </a>
 
-                    {/* Secondary CTA - Electric Cyan */}
+                    {/* n-Law Protocol */}
                     <Link
-                        href="/blueprint"
+                        href="/n-law"
+                        className="flex items-center gap-2 bg-electric-cyan/10 border border-electric-cyan/30 px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-electric-cyan hover:bg-electric-cyan/20 transition"
+                    >
+                        <ShieldCheck size={14} className="text-electric-cyan" />
+                        n-Law Protocol Active
+                    </Link>
+                </div>
+
+                {/* Main Headline — Plain Language */}
+                <h1 className="font-institutional text-4xl md:text-7xl lg:text-8xl font-medium text-institutional-white uppercase tracking-tighter leading-[0.9] mb-8">
+                    We Set Up <span className="text-action-gold">Manager.io</span><br />
+                    For Your Business
+                </h1>
+
+                {/* Subtitle — What you actually do, in human language */}
+                <p className="font-institutional text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto mb-6 leading-relaxed font-light">
+                    Cloud accounting setup, customization, training, and ongoing support — tailored for businesses across Bangladesh.
+                </p>
+
+                {/* Social Proof Line */}
+                <p className="text-sm text-gray-500 mb-14 font-light">
+                    15 years experience · 6+ industries served · Trusted from aquaculture to manufacturing
+                </p>
+
+                {/* CTAs */}
+                <div className="flex flex-col md:flex-row gap-6 justify-center">
+                    {/* Primary CTA - WhatsApp */}
+                    <a
+                        href="https://wa.me/8801719300849?text=Hi, I'd like to discuss Manager.io setup for my business."
+                        className="flex items-center justify-center gap-3 gold-racer haptic-button px-10 py-5 rounded-2xl uppercase tracking-widest text-sm shadow-2xl"
+                    >
+                        <MessageSquareCode size={22} /> Get Free Consultation
+                    </a>
+
+                    {/* Secondary CTA */}
+                    <Link
+                        href="/services"
                         className="flex items-center justify-center gap-3 bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan font-black px-10 py-5 rounded-2xl uppercase tracking-widest text-sm hover:bg-electric-cyan/20 transition haptic-button"
                     >
-                        View Engineering Blueprint <ArrowRight size={18} />
+                        See How We Work <ArrowRight size={18} />
                     </Link>
                 </div>
             </div>
 
-            {/* Institutional Footer Hint */}
+            {/* Bottom hint */}
             <div className="absolute bottom-10 text-[10px] text-white/20 uppercase tracking-[1em] font-bold font-institutional">
-                Mission Control Node V2.0
+                INSPIRON TECH · Dhaka, Bangladesh
             </div>
         </section>
     );

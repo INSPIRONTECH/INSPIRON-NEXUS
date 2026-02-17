@@ -44,7 +44,7 @@ export const GlobalHeader = () => {
                         href="https://wa.me/8801719300849"
                         className="flex items-center gap-2 bg-electric-cyan text-deep-navy-black px-6 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-electric-cyan/90 transition haptic-button"
                     >
-                        <MessageSquareCode size={14} /> Book Audit
+                        <MessageSquareCode size={14} /> Free Consult
                     </a>
                 </div>
 
@@ -75,7 +75,7 @@ export const GlobalHeader = () => {
                             href="https://wa.me/8801719300849"
                             className="flex items-center justify-center gap-2 bg-electric-cyan text-deep-navy-black px-6 py-4 rounded-xl font-black uppercase tracking-widest mt-4"
                         >
-                            <MessageSquareCode size={18} /> Book Audit
+                            <MessageSquareCode size={18} /> Free Consult
                         </a>
                     </div>
                 </div>
