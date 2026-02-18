@@ -45,56 +45,67 @@ export default function SocialAssetsPage() {
             </section>
 
 
-            {/* ─── 2. LINKEDIN COVER BANNER (1584 x 396) ────────────────────── */}
-            <section className="flex flex-col items-center gap-4">
-                <h2 className="text-gray-500 uppercase tracking-widest text-xs">LinkedIn Banner (1584 x 396)</h2>
+            {/* ─── 2. LINKEDIN COVER BANNER VARIANTS (1584 x 396) ────────────────────── */}
+            <section className="flex flex-col items-center gap-12 w-full">
+                <h2 className="text-gray-500 uppercase tracking-widest text-xs">LinkedIn Banner Variants (1584 x 396)</h2>
 
-                <div className="w-[1584px] h-[396px] bg-deep-navy-black relative overflow-hidden flex items-center justify-between px-24 border border-white/10 scale-50 origin-top">
-                    {/* Tech Grid Background */}
-                    <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] [background-size:24px_24px]"></div>
-                    <div className="absolute right-0 top-0 w-[600px] h-[600px] bg-electric-cyan/5 blur-[120px] rounded-full"></div>
+                {[
+                    { title: "The Architect", headline: "Deploy Your", highlight: "Architecture", sub: "We architect the accounting logic other consultants walk away from." },
+                    { title: "Zero Fluff", headline: "Stop Buying Software.", highlight: "Buy Outcomes.", sub: "We don't have account managers. We have architects." },
+                    { title: "Financial Forensics", headline: "Find The Leak.", highlight: "Plug The Gap.", sub: "Your ledger is bleeding capital. We know exactly where." },
+                    { title: "Complexity Challenge", headline: "Simple Shop?", highlight: "Use Excel.", sub: "Multi-entity manufacturing with inter-company billing? Call us." },
+                    { title: "The Execution", headline: "Theory is Free.", highlight: "Logic is expensive.", sub: "Deploy Your Logic. 0.1% Error Tolerance." }
+                ].map((variant, idx) => (
+                    <div key={idx} className="flex flex-col items-center gap-2">
+                        <div className="text-xs text-gray-600 uppercase tracking-widest mb-2">Option {idx + 1}: {variant.title}</div>
+                        <div className="w-[1584px] h-[396px] bg-deep-navy-black relative overflow-hidden flex items-center justify-between px-24 border border-white/10 scale-50 origin-top mb-[-150px]">
+                            {/* Tech Grid Background */}
+                            <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] [background-size:24px_24px]"></div>
+                            <div className="absolute right-0 top-0 w-[600px] h-[600px] bg-electric-cyan/5 blur-[120px] rounded-full"></div>
 
-                    {/* Left: Value Prop */}
-                    <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-6">
-                            <span className="px-3 py-1 border border-electric-cyan text-electric-cyan text-xl font-bold rounded uppercase tracking-widest">
-                                Official Partner
-                            </span>
-                            <span className="text-white/50 text-xl font-light">|</span>
-                            <span className="text-white text-xl font-bold tracking-wider">Manager.io</span>
-                        </div>
+                            {/* Left: Value Prop */}
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <span className="px-3 py-1 border border-electric-cyan text-electric-cyan text-xl font-bold rounded uppercase tracking-widest">
+                                        Official Partner
+                                    </span>
+                                    <span className="text-white/50 text-xl font-light">|</span>
+                                    <span className="text-white text-xl font-bold tracking-wider">Manager.io</span>
+                                </div>
 
-                        <h1 className="text-7xl font-black text-white uppercase tracking-tight leading-none mb-4">
-                            Deploy Your<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-action-gold to-yellow-600">
-                                Architecture
-                            </span>
-                        </h1>
-                        <p className="text-gray-300 text-2xl font-light max-w-2xl">
-                            We architect the accounting logic other consultants walk away from.
-                        </p>
-                    </div>
-
-                    {/* Right: CTA & Authority */}
-                    <div className="relative z-10 text-right space-y-8">
-                        <div>
-                            <div className="text-electric-cyan font-mono text-xl mb-2">inspiron.tech/architect</div>
-                            <div className="text-white font-bold text-3xl">MD ABU HASAN</div>
-                            <div className="text-gray-400 uppercase tracking-widest">Founder & Chief Architect</div>
-                        </div>
-
-                        <div className="flex gap-4 justify-end">
-                            <div className="bg-white/5 px-6 py-3 rounded-xl border border-white/10 backdrop-blur-sm">
-                                <div className="text-action-gold font-bold text-2xl">14+</div>
-                                <div className="text-[10px] text-gray-400 uppercase">Years Exp</div>
+                                <h1 className="text-7xl font-black text-white uppercase tracking-tight leading-none mb-4 whitespace-nowrap">
+                                    {variant.headline}<br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-action-gold to-yellow-600">
+                                        {variant.highlight}
+                                    </span>
+                                </h1>
+                                <p className="text-gray-300 text-2xl font-light max-w-2xl">
+                                    {variant.sub}
+                                </p>
                             </div>
-                            <div className="bg-white/5 px-6 py-3 rounded-xl border border-white/10 backdrop-blur-sm">
-                                <div className="text-electric-cyan font-bold text-2xl">0.1%</div>
-                                <div className="text-[10px] text-gray-400 uppercase">Tolerance</div>
+
+                            {/* Right: CTA & Authority */}
+                            <div className="relative z-10 text-right space-y-8">
+                                <div>
+                                    <div className="text-electric-cyan font-mono text-xl mb-2">inspiron.tech/architect</div>
+                                    <div className="text-white font-bold text-3xl">MD ABU HASAN</div>
+                                    <div className="text-gray-400 uppercase tracking-widest">Founder & Chief Architect</div>
+                                </div>
+
+                                <div className="flex gap-4 justify-end">
+                                    <div className="bg-white/5 px-6 py-3 rounded-xl border border-white/10 backdrop-blur-sm">
+                                        <div className="text-action-gold font-bold text-2xl">14+</div>
+                                        <div className="text-[10px] text-gray-400 uppercase">Years Exp</div>
+                                    </div>
+                                    <div className="bg-white/5 px-6 py-3 rounded-xl border border-white/10 backdrop-blur-sm">
+                                        <div className="text-electric-cyan font-bold text-2xl">0.1%</div>
+                                        <div className="text-[10px] text-gray-400 uppercase">Tolerance</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                ))}
             </section>
 
 
@@ -124,35 +135,26 @@ export default function SocialAssetsPage() {
             <section className="flex flex-col items-center gap-4 pb-24">
                 <h2 className="text-gray-500 uppercase tracking-widest text-xs">Email Signature Logo (200x200)</h2>
 
-                <div className="w-[200px] h-[200px] bg-transparent flex items-center justify-center p-0 border border-white/10 group relative">
-                    {/* The SVG Logo */}
-                    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="200" height="200" fill="#020817" />
+                <div className="flex flex-col items-center gap-6">
+                    <div className="w-[200px] h-[200px] bg-transparent flex items-center justify-center p-0 border border-white/10 group relative">
+                        {/* The SVG Logo */}
+                        <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#020817" />
+                            <text x="100" y="85" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="32" fill="#FFFFFF" letterSpacing="0.05em">INSPIRON</text>
+                            <text x="100" y="112" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="48" fill="#00D2FF" letterSpacing="0.05em">TECH</text>
+                            <rect x="70" y="128" width="60" height="3" fill="#FFD700" />
+                            <text x="100" y="145" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="9" fill="#9CA3AF" letterSpacing="0.15em">COMMAND LEVEL LOGIC</text>
+                            <rect x="0.5" y="0.5" width="199" height="199" stroke="#ffffff" strokeOpacity="0.1" />
+                        </svg>
+                    </div>
 
-                        {/* INSPIRON */}
-                        <text x="100" y="85" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="32" fill="#FFFFFF" letterSpacing="2">
-                            INSPIRON
-                        </text>
-
-                        {/* TECH */}
-                        <text x="100" y="115" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="32" fill="#00D2FF" letterSpacing="4">
-                            TECH
-                        </text>
-
-                        {/* Gold Line */}
-                        <rect x="70" y="128" width="60" height="2" fill="#FFD700" />
-
-                        {/* Tagline */}
-                        <text x="100" y="145" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="8" fill="#9CA3AF" letterSpacing="1.5">
-                            COMMAND LEVEL LOGIC
-                        </text>
-
-                        {/* Subtle Border */}
-                        <rect x="0.5" y="0.5" width="199" height="199" stroke="#ffffff" strokeOpacity="0.1" />
-                    </svg>
-
-                    <div className="absolute -bottom-8 text-[10px] text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                        Right-click &gt; Save As to get SVG/PNG.
+                    <div className="w-full max-w-lg space-y-4">
+                        <textarea
+                            readOnly
+                            className="w-full h-32 bg-black border border-white/10 rounded-xl p-4 text-[10px] font-mono text-electric-cyan focus:outline-none"
+                            value={`<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#020817"/><text x="100" y="85" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="32" fill="#FFFFFF" letterSpacing="0.05em">INSPIRON</text><text x="100" y="112" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="48" fill="#00D2FF" letterSpacing="0.05em">TECH</text><rect x="70" y="128" width="60" height="3" fill="#FFD700"/><text x="100" y="145" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="9" fill="#9CA3AF" letterSpacing="0.15em">COMMAND LEVEL LOGIC</text></svg>`}
+                        />
+                        <p className="text-xs text-gray-500 text-center">Copy code above or screenshot the preview.</p>
                     </div>
                 </div>
             </section>
