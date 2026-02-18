@@ -133,18 +133,24 @@ export default function SocialAssetsPage() {
 
             {/* ─── 4. EMAIL SIGNATURE LOGO (Hosted Asset Mockup) ────────────── */}
             <section className="flex flex-col items-center gap-4 pb-24">
-                <h2 className="text-gray-500 uppercase tracking-widest text-xs">Email Signature Logo (200x200)</h2>
+                <h2 className="text-gray-500 uppercase tracking-widest text-xs">Email Signature Logo (200x200) - Master Vault Asset</h2>
 
                 <div className="flex flex-col items-center gap-6">
                     <div className="w-[200px] h-[200px] bg-transparent flex items-center justify-center p-0 border border-white/10 group relative">
-                        {/* The SVG Logo */}
-                        <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="200" height="200" fill="#020817" />
-                            <text x="100" y="85" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="32" fill="#FFFFFF" letterSpacing="0.05em">INSPIRON</text>
-                            <text x="100" y="112" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="48" fill="#00D2FF" letterSpacing="0.05em">TECH</text>
-                            <rect x="70" y="128" width="60" height="3" fill="#FFD700" />
-                            <text x="100" y="145" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="9" fill="#9CA3AF" letterSpacing="0.15em">COMMAND LEVEL LOGIC</text>
-                            <rect x="0.5" y="0.5" width="199" height="199" stroke="#ffffff" strokeOpacity="0.1" />
+                        {/* The SVG Logo - EXACT MATCH from n-law MasterLockup */}
+                        <svg width="200" height="200" viewBox="0 0 358.846 350.3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <mask id="VaultMask_Final_Social" x="-1075.154" y="-1075" width="3000" height="3000" maskUnits="userSpaceOnUse">
+                                    <path fill="#fff" d="M-1075.154-1075h3000v3000h-3000z" />
+                                    <path d="M321.346 350c-10.6-1-19.3-6.1-26-15.3-.3-.6-4.3-7.3-10-16.5-49.2-81.1-52.8-87.8-52.6-88.4 5.5-8.8 19.4-31.2 27.4-43.8 3.3-5.4 5.7-9 6-9.4 1.6 2.7 27.4 45.3 49.4 81.8 17 28.2 31.9 52.8 32.2 53.5 4.2 7 4.2 15.2 0 22.5-5.2 9-15.4 14.9-25.6 14.9h-.8z"
+                                        fill="none" stroke="#000" strokeWidth="24px" strokeLinecap="round" strokeLinejoin="round" />
+                                </mask>
+                            </defs>
+                            <g mask="url(#VaultMask_Final_Social)">
+                                <path d="M87.046 349.3c-30.8 0-57.9-14.8-74.3-40.9-15.4-24.2-16.9-55-4.2-80.5 7.8-14.2 32.9-53.9 57.4-92.4 15.1-23.7 29.3-46.1 39.3-62.6 2.7-4.3 4.8-7.8 8.4-11.5 11.4-13.1 28.1-20.6 45.6-20.6s33.8 8.1 43.8 22.1c5.5 7.8,9.1,16.9,10.3 26.4.3 2.5-.4 4.8-2.1 7.5-1.9 3.3-21.8 34.6-21.8 34.6-.6.9-1.2 1.9-1.8 2.8-1.3 2.2-2.4 4.2-3.9 4.2s-1.2-.3-1.8-.9c-4.2-4.9-8.2-11.5-12-18-2.4-4-4.5-7.9-6.9-11.2-1.8-2.8-4.8-4.5-7.8-4.5s-4.2 1-5.8 3c-5.2 8.1-27.5 43.8-45.6 72.7-11.8 18.9-22.1 35.3-25.4 40.4-2.2 3.6-5.2 8.1-7.9 12.5-1.6 2.7-3.3 5.4-4.8 7.8-.6 1-1.3 2.1-1.9 3.1-2.5 4-4.6 7.5-6.1 11.1-5.2 12.4-.4 27.3 10.9 34.6,5.5 3.6 11.4 5.4 17.5 5.4 12.3 0,25-7.6,32.9-20,5.5-8.1,23.6-37,45-70.6,31.7-50.4 67.9-107.5 76.1-118.7 6.3-6.7 14.5-10.8 22.7-10.8 9.3 0,18.2 5.1,23.2 13.1,4.8 7.9 5.4 16.8 1 24.7-3.6 7-6.6 11.3-10.9 18-3.1 4.9-7.3 11.2-13 20.6-14.4 22.5-31 48.7-47 74.2-24.4 38.9-47.7 75.7-55.3 86.8-17.5 24.1-45.5 38.6-75.1 38.6z" fill="#00D2FF" />
+                            </g>
+                            <path d="M321.346 350c-10.6-1-19.3-6.1-26-15.3-.3-.6-4.3-7.3-10-16.5-49.2-81.1-52.8-87.8-52.6-88.4 5.5-8.8 19.4-31.2 27.4-43.8 3.3-5.4 5.7-9 6-9.4 1.6 2.7 27.4 45.3 49.4 81.8 17 28.2 31.9 52.8 32.2 53.5 4.2 7 4.2 15.2 0 22.5-5.2 9-15.4 14.9-25.6 14.9h-.8z" fill="#00D2FF" />
+                            <circle cx="321.346" cy="37.5" r="37.5" fill="#FFD700" />
                         </svg>
                     </div>
 
@@ -152,7 +158,7 @@ export default function SocialAssetsPage() {
                         <textarea
                             readOnly
                             className="w-full h-32 bg-black border border-white/10 rounded-xl p-4 text-[10px] font-mono text-electric-cyan focus:outline-none"
-                            value={`<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#020817"/><text x="100" y="85" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="32" fill="#FFFFFF" letterSpacing="0.05em">INSPIRON</text><text x="100" y="112" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="48" fill="#00D2FF" letterSpacing="0.05em">TECH</text><rect x="70" y="128" width="60" height="3" fill="#FFD700"/><text x="100" y="145" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="9" fill="#9CA3AF" letterSpacing="0.15em">COMMAND LEVEL LOGIC</text></svg>`}
+                            value={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358.846 350.3"><defs><mask id="inspiron-gap" x="-1075.154" y="-1075" width="3000" height="3000" maskUnits="userSpaceOnUse"><path fill="#fff" d="M-1075.154-1075h3000v3000h-3000z"/><path d="M321.346 350c-10.6-1-19.3-6.1-26-15.3-.3-.6-4.3-7.3-10-16.5-49.2-81.1-52.8-87.8-52.6-88.4 5.5-8.8 19.4-31.2 27.4-43.8 3.3-5.4 5.7-9 6-9.4 1.6 2.7 27.4 45.3 49.4 81.8 17 28.2 31.9 52.8 32.2 53.5 4.2 7 4.2 15.2 0 22.5-5.2 9-15.4 14.9-25.6 14.9h-.8z" style="fill:none; stroke:#000; stroke-width:24px; stroke-linecap:round; stroke-linejoin:round"/></mask></defs><g mask="url(#inspiron-gap)"><path d="M87.046 349.3c-30.8 0-57.9-14.8-74.3-40.9-15.4-24.2-16.9-55-4.2-80.5 7.8-14.2 32.9-53.9 57.4-92.4 15.1-23.7 29.3-46.1 39.3-62.6 2.7-4.3 4.8-7.8 8.4-11.5 11.4-13.1 28.1-20.6 45.6-20.6s33.8 8.1 43.8 22.1c5.5 7.8,9.1,16.9,10.3 26.4.3 2.5-.4 4.8-2.1 7.5-1.9 3.3-21.8 34.6-21.8 34.6-.6.9-1.2 1.9-1.8 2.8-1.3 2.2-2.4 4.2-3.9 4.2s-1.2-.3-1.8-.9c-4.2-4.9-8.2-11.5-12-18-2.4-4-4.5-7.9-6.9-11.2-1.8-2.8-4.8-4.5-7.8-4.5s-4.2 1-5.8 3c-5.2 8.1-27.5 43.8-45.6 72.7-11.8 18.9-22.1 35.3-25.4 40.4-2.2 3.6-5.2 8.1-7.9 12.5-1.6 2.7-3.3 5.4-4.8 7.8-.6 1-1.3 2.1-1.9 3.1-2.5 4-4.6 7.5-6.1 11.1-5.2 12.4-.4 27.3 10.9 34.6,5.5 3.6 11.4 5.4 17.5 5.4 12.3 0,25-7.6,32.9-20,5.5-8.1,23.6-37,45-70.6,31.7-50.4 67.9-107.5 76.1-118.7 6.3-6.7 14.5-10.8 22.7-10.8 9.3 0,18.2 5.1,23.2 13.1,4.8 7.9 5.4 16.8 1 24.7-3.6 7-6.6 11.3-10.9 18-3.1 4.9-7.3 11.2-13 20.6-14.4 22.5-31 48.7-47 74.2-24.4 38.9-47.7 75.7-55.3 86.8-17.5 24.1-45.5 38.6-75.1 38.6z" fill="#00D2FF"/></g><path d="M321.346 350c-10.6-1-19.3-6.1-26-15.3-.3-.6-4.3-7.3-10-16.5-49.2-81.1-52.8-87.8-52.6-88.4 5.5-8.8 19.4-31.2 27.4-43.8 3.3-5.4 5.7-9 6-9.4 1.6 2.7 27.4 45.3 49.4 81.8 17 28.2 31.9 52.8 32.2 53.5 4.2 7 4.2 15.2 0 22.5-5.2 9-15.4 14.9-25.6 14.9h-.8z" fill="#00D2FF"/><circle cx="321.346" cy="37.5" r="37.5" fill="#FFD700"/></svg>`}
                         />
                         <p className="text-xs text-gray-500 text-center">Copy code above or screenshot the preview.</p>
                     </div>
