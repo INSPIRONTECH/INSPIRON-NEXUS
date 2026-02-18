@@ -25,9 +25,6 @@
     "paths": {
       "@/*": [
         "./*"
-      ],
-      "@brand/*": [
-        "./src/brand-system/*"
       ]
     },
     "target": "ES2017"

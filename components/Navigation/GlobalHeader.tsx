@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, MessageSquareCode } from 'lucide-react';
-import { RefinedLogo } from '@brand/components/Branding/RefinedLogo';
+import { RefinedLogo } from '../Branding/RefinedLogo';
 
 const NAV_LINKS = [
     { href: '/', label: 'Home' },

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, MessageSquareCode, Users, Building2, TrendingUp, BadgeCheck } from 'lucide-react';
+import { V121Factory } from '@/components/Branding/v121Factory';
 
 /**
  * INTERNAL TOOL: SOCIAL ASSETS GENERATOR
@@ -12,14 +13,20 @@ export default function SocialAssetsPage() {
         <div className="min-h-screen bg-neutral-900 p-8 space-y-24">
 
             {/* INSTRUCTIONS */}
-            <div className="max-w-2xl mx-auto text-center mb-16">
-                <h1 className="text-3xl font-bold text-white mb-4">Brand Asset Generator</h1>
+            <div className="max-w-4xl mx-auto text-center mb-16">
+                <h1 className="text-3xl font-bold text-white mb-4">Brand Asset Command</h1>
                 <p className="text-gray-400">
-                    Use your browser's "Screenshot Node" or Snipping Tool to capture these assets.
+                    Use the <strong>Brand Factory</strong> to generate custom assets, or scroll down for standard static downloads.
                     <br />
                     <span className="text-electric-cyan">Dimensions are optimized for LinkedIn, Facebook, and WhatsApp.</span>
                 </p>
             </div>
+
+            {/* ─── 0. BRAND FACTORY (Dynamic Generator) ────────────────────────── */}
+            <section className="flex flex-col items-center gap-8 w-full max-w-[1600px] mx-auto">
+                <h2 className="text-gray-500 uppercase tracking-widest text-xs">Dynamic Asset Lab (v1.2.1)</h2>
+                <V121Factory />
+            </section>
 
             {/* ─── 1. PROFILE PICTURE (LinkedIn / WhatsApp / Email) ───────────── */}
             <section className="flex flex-col items-center gap-4">
