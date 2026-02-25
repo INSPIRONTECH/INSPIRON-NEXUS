@@ -149,6 +149,24 @@ const InstitutionalTextArea = ({ label, value, onChange, rows }: { label: string
 
 
 
+// ─── SHARED UI PRIMITIVES ──────────────────────────────────────────────────
+const TechInput = ({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) => (
+    <div className="space-y-1 group">
+        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono group-hover:text-electric-cyan transition-colors">{label}</label>
+        <input type="text" value={value} onChange={e => onChange(e.target.value)} spellCheck={false}
+            className="w-full bg-black/40 border border-white/10 rounded px-3 py-3 text-xs text-white focus:outline-none focus:border-electric-cyan focus:bg-electric-cyan/5 font-mono transition-all" />
+    </div>
+);
+
+const TechTextArea = ({ label, value, onChange, rows }: { label: string; value: string; onChange: (v: string) => void; rows: number }) => (
+    <div className="space-y-1 group">
+        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono group-hover:text-electric-cyan transition-colors">{label}</label>
+        <textarea value={value} onChange={e => onChange(e.target.value)} rows={rows} spellCheck={false}
+            className="w-full bg-black/40 border border-white/10 rounded px-3 py-3 text-xs text-white focus:outline-none focus:border-electric-cyan focus:bg-electric-cyan/5 font-mono transition-all resize-none" />
+    </div>
+);
+
+
 export default function SocialAssetsPage() {
 
     // ─── STATE ARCHITECTURE ─────────────────────────────────────────────────
@@ -377,6 +395,7 @@ export default function SocialAssetsPage() {
                             })}
                         </div>
                     </div>
+<<<<<<< HEAD
                     {/* Row 2: sub-mode pills */}
                     <div className="h-9 flex items-center gap-1 pb-2 overflow-x-auto scrollbar-none border-t border-white/5">
                         {NAV_GROUPS.find(g => g.modes.includes(activeMode as never))?.modes.map((modeId) => {
@@ -397,6 +416,22 @@ export default function SocialAssetsPage() {
                                 </button>
                             );
                         })}
+=======
+                    <div className="flex gap-1 bg-white/5 p-1 rounded-lg border border-white/5 overflow-x-auto scrollbar-none">
+                        {(PLATFORMS as readonly typeof PLATFORMS[number][]).map((mode) => (
+                            <button
+                                key={mode.id}
+                                onClick={() => setActiveMode(mode.id)}
+                                className={`flex items-center gap-2 px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest transition-all ${activeMode === mode.id
+                                    ? 'bg-electric-cyan text-deep-navy-black shadow-[0_0_20px_rgba(0,210,255,0.2)]'
+                                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                    }`}
+                            >
+                                <mode.icon size={14} />
+                                <span className="hidden md:inline">{mode.label}</span>
+                            </button>
+                        ))}
+>>>>>>> c5444db22a0d7196024e48dc144dd11aa014f576
                     </div>
                 </div>
             </nav>
@@ -444,7 +479,11 @@ export default function SocialAssetsPage() {
                                     <InstitutionalInput label="Metric 2 Lbl" value={linkedinData.metric2Lbl} onChange={v => setLinkedinData({ ...linkedinData, metric2Lbl: v })} />
                                 </div>
                                 <div className="h-px bg-white/10" />
+<<<<<<< HEAD
                                 <InstitutionalInput label="Website / CTA" value={linkedinData.website} onChange={v => setLinkedinData({ ...linkedinData, website: v })} />
+=======
+                                <TechInput label="Website / CTA" value={linkedinData.website} onChange={v => setLinkedinData({ ...linkedinData, website: v })} />
+>>>>>>> c5444db22a0d7196024e48dc144dd11aa014f576
                             </div>
                         )}
 
@@ -497,6 +536,7 @@ export default function SocialAssetsPage() {
                             </div>
                         )}
 
+<<<<<<< HEAD
 
                         {/* INSTAGRAM CONTROLS */}
                         {activeMode.startsWith('instagram') && (
@@ -508,6 +548,18 @@ export default function SocialAssetsPage() {
                                 <InstitutionalTextArea label="Sub-Narrative" value={instagramData.subtext}
                                     onChange={v => setInstagramData({ ...instagramData, subtext: v })} rows={3} />
                                 <InstitutionalInput label="CTA" value={instagramData.cta}
+=======
+                        {/* INSTAGRAM CONTROLS */}
+                        {activeMode.startsWith('instagram') && (
+                            <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-300">
+                                <TechInput label="Headline" value={instagramData.headline}
+                                    onChange={v => setInstagramData({ ...instagramData, headline: v })} />
+                                <TechInput label="Gold Highlight" value={instagramData.highlight}
+                                    onChange={v => setInstagramData({ ...instagramData, highlight: v })} />
+                                <TechTextArea label="Sub-Narrative" value={instagramData.subtext}
+                                    onChange={v => setInstagramData({ ...instagramData, subtext: v })} rows={3} />
+                                <TechInput label="CTA" value={instagramData.cta}
+>>>>>>> c5444db22a0d7196024e48dc144dd11aa014f576
                                     onChange={v => setInstagramData({ ...instagramData, cta: v })} />
                             </div>
                         )}
@@ -586,7 +638,11 @@ export default function SocialAssetsPage() {
                         )}
                     </div>
                     <div className="mt-auto p-6 border-t border-white/10 text-[10px] text-gray-600 font-mono text-center">
+<<<<<<< HEAD
                         INSPIRON_SOCIAL_GENERATOR_V2.14
+=======
+                        INSPIRON_SOCIAL_GENERATOR_V2.13
+>>>>>>> c5444db22a0d7196024e48dc144dd11aa014f576
                     </div>
                 </aside>
 
@@ -1223,4 +1279,8 @@ export default function SocialAssetsPage() {
     );
 }
 
+<<<<<<< HEAD
 
+=======
+// ─── TECHNICAL COMPONENT PRIMITIVES ─────────────────────────────────────────
+>>>>>>> c5444db22a0d7196024e48dc144dd11aa014f576
