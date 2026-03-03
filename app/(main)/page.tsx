@@ -22,7 +22,7 @@ export default function LandingPage() {
                         At INSPIRON TECH, we implement Manager.io as the core of your financial
                         architecture — we don&apos;t just install software, we architect workflow logic.
                         14+ years IT infrastructure · 10+ years Manager.io · 15+ industries architected ·
-                        NBR/VAT-ready reporting (Mushak 6.3) · 50+ transformations · 0.1% error tolerance.
+                        NBR/VAT-ready reporting (Mushak 6.3) · 20+ active clients · 100+ migrations · 0.1% error tolerance.
                     </p>
                 </div>
             </section>

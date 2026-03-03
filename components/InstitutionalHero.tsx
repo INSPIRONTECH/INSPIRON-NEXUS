@@ -29,6 +29,17 @@ export const InstitutionalHero = () => {
                         Official Manager.io Partner
                     </a>
 
+                    {/* Manager.io Listed Accountant & Developer */}
+                    <a
+                        href="https://www.manager.io/accountants"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 bg-action-gold/10 border border-action-gold/30 px-5 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest text-action-gold hover:bg-action-gold/20 transition"
+                    >
+                        <BadgeCheck size={14} className="text-action-gold" />
+                        Listed Manager.io Accountant &amp; Developer
+                    </a>
+
                     {/* n-Law Protocol */}
                     <Link
                         href="/n-law"
@@ -51,8 +62,11 @@ export const InstitutionalHero = () => {
                 </p>
 
                 {/* Social Proof Line */}
-                <p className="text-sm text-gray-500 mb-14 font-light">
-                    15 years experience · 15+ industries served · Trusted by 50+ businesses
+                <p className="text-sm text-gray-500 mb-4 font-light">
+                    15 years experience · 15+ industries served · 20+ active clients · 100+ migrations
+                </p>
+                <p className="text-xs text-gray-600 mb-14 font-light tracking-widest uppercase">
+                    Export-ready · Active on Upwork · Executing globally
                 </p>
 
                 {/* CTAs */}

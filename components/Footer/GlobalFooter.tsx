@@ -136,6 +136,16 @@ export const GlobalFooter = () => {
                         © 2026 INSPIRON TECH. ALL LOGIC ARCHITECTED IN DHAKA-BD.
                     </p>
                     <div className="flex gap-6">
+                        <a href="https://www.linkedin.com/in/cyberhasan/"
+                            target="_blank" rel="noopener noreferrer"
+                            className="font-mono text-[10px] text-white/40 hover:text-white/70 tracking-widest transition-colors">
+                            LINKEDIN ↗
+                        </a>
+                        <a href="https://github.com/INSPIRON-TECH-BD"
+                            target="_blank" rel="noopener noreferrer"
+                            className="font-mono text-[10px] text-white/40 hover:text-white/70 tracking-widest transition-colors">
+                            GITHUB ↗
+                        </a>
                         <a href="https://www.upwork.com/freelancers/~011085e2a7cde3f437"
                             target="_blank" rel="noopener noreferrer"
                             className="font-mono text-[10px] text-electric-cyan hover:underline tracking-widest">

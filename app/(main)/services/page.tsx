@@ -31,7 +31,7 @@ export default function ServicesPage() {
                             { icon: FileSpreadsheet, title: 'Tally/Excel Migration', desc: 'Zero data loss (500+ migrations). Parallel run + validation. Move from legacy systems to Manager.io.' },
                             { icon: ShieldCheck, title: 'NBR/VAT Automation', desc: 'Mushak 6.3/9.1 forms. Multi-currency exports. Audit-ready reporting built into your workflow.' },
                             { icon: FileBarChart, title: 'Custom Dashboards', desc: 'ANY data visualized. Real-time KPIs. Next.js/Vercel integrations for advanced analytics.' },
-                            { icon: GraduationCap, title: 'Bilingual Training', desc: 'Bengali/English. Foundation/Pro/Expert levels. Your team becomes self-sufficient in 2 weeks.' }
+                            { icon: GraduationCap, title: 'Bilingual Training', desc: 'Bengali/English. Foundation 15K / Pro 35K / Expert 60K. Your team becomes self-sufficient in 2 weeks.' }
                         ].map(({ icon: Icon, title, desc }, i) => (
                             <div key={i} className="p-10 bg-white/5 border border-white/10 rounded-[40px] hover:border-action-gold/50 group transition-all duration-300">
                                 <div className="text-electric-cyan mb-6 group-hover:scale-110 transition duration-300">

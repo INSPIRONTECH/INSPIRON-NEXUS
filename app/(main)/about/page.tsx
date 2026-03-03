@@ -111,8 +111,8 @@ const credentials = [
         linkText: 'View Profile ↗',
     },
     {
-        label: 'BASIS Member',
-        sublabel: 'Bangladesh Association of Software & Information Services',
+        label: 'BASIS Membership',
+        sublabel: 'Bangladesh Association of Software & Information Services — Application Pending',
         link: null,
         linkText: null,
     },
@@ -125,7 +125,7 @@ const credentials = [
     {
         label: 'Upwork Verified Freelancer',
         sublabel: 'Manager.io · Accounting · IT Consulting',
-        link: 'https://www.upwork.com/freelancers/~011085e2a7cde3f437?viewMode=1',
+        link: 'https://www.upwork.com/freelancers/CyberHasan',
         linkText: 'Verify ↗',
     },
     {
@@ -279,6 +279,24 @@ export default function AboutPage() {
                                     <p className="text-gray-400 text-sm leading-relaxed font-light mb-6">
                                         {item.story}
                                     </p>
+
+                                    {/* VAT Transformation Callout — X-Press card only */}
+                                    {index === 1 && (
+                                        <div className="mb-6 p-5 rounded-[20px] bg-electric-cyan/5 border border-electric-cyan/20">
+                                            <p className="text-electric-cyan text-[10px] font-black uppercase tracking-widest mb-2">
+                                                ⚡ Origin of Compliance Practice — 2015–2018
+                                            </p>
+                                            <p className="text-gray-300 text-sm font-light leading-relaxed">
+                                                Inside X-Press Technologies, the first full NBR/VAT compliance system was built — manually.
+                                                Mushak-11, 16, 17, 18, and 19 registers prepared by hand. TDS certificates issued.
+                                                Salary certificates handled for employee visas and bank loans.
+                                                VAT reconciliation done between ISP gateway transactions and accounting records.
+                                                <br /><br />
+                                                <strong className="text-institutional-white">This is where the zero-approximation doctrine was born.</strong>{' '}
+                                                Not in a classroom — inside an ISP&apos;s accounts department, where every number answered to the NBR.
+                                            </p>
+                                        </div>
+                                    )}
 
                                     {/* Skills */}
                                     <div className="flex flex-wrap gap-2">
