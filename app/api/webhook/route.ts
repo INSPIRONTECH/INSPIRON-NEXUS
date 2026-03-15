@@ -58,7 +58,11 @@ export async function POST(req: NextRequest) {
 }
 
 async function sendTemplateResponse(to: string, name: string) {
-    const phoneId = process.env.PHONE_NUMBER_ID || '917810161405498';
+    const phoneId = process.env.PHONE_NUMBER_ID;
+    if (!phoneId) {
+        console.error('[WEBHOOK] PHONE_NUMBER_ID env var is not set — cannot send template response');
+        return;
+    }
     const url = `https://graph.facebook.com/v21.0/${phoneId}/messages`;
 
     const response = await fetch(url, {
@@ -94,7 +98,11 @@ async function sendTemplateResponse(to: string, name: string) {
 }
 
 async function sendInternalWhaleAlert(to: string, clientName: string, clientPhone: string, text: string) {
-    const phoneId = process.env.PHONE_NUMBER_ID || '917810161405498';
+    const phoneId = process.env.PHONE_NUMBER_ID;
+    if (!phoneId) {
+        console.error('[WEBHOOK] PHONE_NUMBER_ID env var is not set — cannot send whale alert');
+        return;
+    }
     const url = `https://graph.facebook.com/v21.0/${phoneId}/messages`;
 
     const response = await fetch(url, {

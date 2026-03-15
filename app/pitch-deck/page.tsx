@@ -1,9 +1,13 @@
-import React from 'react';
+'use client';
 
-// Redirect to the first slide
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+// Redirect to the first slide — must be client-side to avoid SSR window crash
 export default function PitchDeckRedirect() {
-    if (typeof window !== 'undefined') {
-        window.location.href = '/pitch-deck/slide-01';
-    }
+    const router = useRouter();
+    useEffect(() => {
+        router.replace('/pitch-deck/slide-01');
+    }, [router]);
     return null;
 }

@@ -109,7 +109,7 @@ const MODE_SCALES: Record<ActiveMode, number> = {
     'linkedin-page': 0.7,
     'linkedin-page-logo': 0.8,
     'linkedin-post': 0.5,
-    facebook: 0.65,
+    facebook: 0.65, // kept for compatibility — not a navigable mode, acts as shared scale
     'facebook-personal': 0.65,
     'facebook-page': 0.65,
     'facebook-group': 0.28,
@@ -148,23 +148,6 @@ const InstitutionalTextArea = ({ label, value, onChange, rows }: { label: string
 );
 
 
-
-// ─── SHARED UI PRIMITIVES ──────────────────────────────────────────────────
-const TechInput = ({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) => (
-    <div className="space-y-1 group">
-        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono group-hover:text-electric-cyan transition-colors">{label}</label>
-        <input type="text" value={value} onChange={e => onChange(e.target.value)} spellCheck={false}
-            className="w-full bg-black/40 border border-white/10 rounded px-3 py-3 text-xs text-white focus:outline-none focus:border-electric-cyan focus:bg-electric-cyan/5 font-mono transition-all" />
-    </div>
-);
-
-const TechTextArea = ({ label, value, onChange, rows }: { label: string; value: string; onChange: (v: string) => void; rows: number }) => (
-    <div className="space-y-1 group">
-        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono group-hover:text-electric-cyan transition-colors">{label}</label>
-        <textarea value={value} onChange={e => onChange(e.target.value)} rows={rows} spellCheck={false}
-            className="w-full bg-black/40 border border-white/10 rounded px-3 py-3 text-xs text-white focus:outline-none focus:border-electric-cyan focus:bg-electric-cyan/5 font-mono transition-all resize-none" />
-    </div>
-);
 
 
 export default function SocialAssetsPage() {
@@ -214,15 +197,8 @@ export default function SocialAssetsPage() {
         role: "Founder & Chief Architect", // shared for old status
     });
 
-    const [previewMode, setPreviewMode] = useState<'desktop' | 'mobile'>('desktop');
-    const [isExporting, setIsExporting] = useState(false);
-    const [isMac, setIsMac] = useState(false);
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setIsMac(navigator.userAgent.includes('Mac') || navigator.userAgent.includes('Macintosh'));
-        }
-    }, []);
+    const [isExporting, setIsExporting] = useState(false);
 
     const [profileData, setProfileData] = useState({
         initials: "IT",
@@ -463,7 +439,7 @@ export default function SocialAssetsPage() {
                                     <InstitutionalInput label="Metric 2 Lbl" value={linkedinData.metric2Lbl} onChange={v => setLinkedinData({ ...linkedinData, metric2Lbl: v })} />
                                 </div>
                                 <div className="h-px bg-white/10" />
-                                <TechInput label="Website / CTA" value={linkedinData.website} onChange={v => setLinkedinData({ ...linkedinData, website: v })} />
+                                <InstitutionalInput label="Website / CTA" value={linkedinData.website} onChange={v => setLinkedinData({ ...linkedinData, website: v })} />
                             </div>
                         )}
 
@@ -519,13 +495,13 @@ export default function SocialAssetsPage() {
                         {/* INSTAGRAM CONTROLS */}
                         {activeMode.startsWith('instagram') && (
                             <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-300">
-                                <TechInput label="Headline" value={instagramData.headline}
+                                <InstitutionalInput label="Headline" value={instagramData.headline}
                                     onChange={v => setInstagramData({ ...instagramData, headline: v })} />
-                                <TechInput label="Gold Highlight" value={instagramData.highlight}
+                                <InstitutionalInput label="Gold Highlight" value={instagramData.highlight}
                                     onChange={v => setInstagramData({ ...instagramData, highlight: v })} />
-                                <TechTextArea label="Sub-Narrative" value={instagramData.subtext}
+                                <InstitutionalTextArea label="Sub-Narrative" value={instagramData.subtext}
                                     onChange={v => setInstagramData({ ...instagramData, subtext: v })} rows={3} />
-                                <TechInput label="CTA" value={instagramData.cta}
+                                <InstitutionalInput label="CTA" value={instagramData.cta}
                                     onChange={v => setInstagramData({ ...instagramData, cta: v })} />
                             </div>
                         )}
@@ -616,14 +592,6 @@ export default function SocialAssetsPage() {
 
                     {/* Toolbar */}
                     <div className="absolute top-6 right-6 z-20 flex gap-4">
-                        <div className="flex gap-1 bg-black/60 backdrop-blur border border-white/10 p-1 rounded-full">
-                            {(['desktop', 'mobile'] as const).map(p => (
-                                <button key={p} onClick={() => setPreviewMode(p)}
-                                    className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all ${previewMode === p ? 'bg-electric-cyan text-deep-navy-black' : 'text-gray-500 hover:text-white'}`}>
-                                    {p === 'desktop' ? '🖥️ Desktop' : '📱 Mobile'}
-                                </button>
-                            ))}
-                        </div>
                         <div className="flex gap-1 bg-black/60 backdrop-blur border border-white/10 p-1 rounded-full">
                             {([{ id: 'dark', icon: Moon }, { id: 'light', icon: Sun }, { id: 'blueprint', icon: Grid }] as { id: RenderMode; icon: React.ElementType }[]).map(m => (
                                 <button key={m.id} onClick={() => setRenderMode(m.id)}

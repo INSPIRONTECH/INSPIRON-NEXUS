@@ -1,19 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
-    const url = req.nextUrl;
+    const { pathname } = req.nextUrl;
     const hostname = req.headers.get('host') || '';
 
-    // 1. Route brand.inspiron.tech to the Brand Manual
-    if (hostname.includes('brand.')) {
-        return NextResponse.rewrite(new URL(`/brand-manual${url.pathname}`, req.url));
+    // 1. Guard /audit-vault with a cookie-based token check
+    //    (browser GETs never carry custom headers — cookie is the only reliable mechanism)
+    if (pathname.startsWith('/audit-vault')) {
+        const token = req.cookies.get('audit_token')?.value;
+        if (token !== process.env.AUDIT_TOKEN) {
+            return NextResponse.redirect(new URL('/401', req.url));
+        }
     }
 
-    // 2. Default logic: inspiron.tech routes to the (main) group
+    // 2. Route brand.inspiron.tech to the Brand Manual
+    if (hostname.includes('brand.')) {
+        return NextResponse.rewrite(new URL(`/brand-manual${pathname}`, req.url));
+    }
+
+    // 3. Default: pass through
     return NextResponse.next();
 }
 
-// Ensure middleware runs only on relevant paths
+// Run on all non-static paths (same as before, plus audit-vault explicitly)
 export const config = {
     matcher: [
         '/((?!api|_next/static|_next/image|favicon.ico).*)',
