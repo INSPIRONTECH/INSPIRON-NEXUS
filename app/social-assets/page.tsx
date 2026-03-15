@@ -1,11 +1,62 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import {
     Scale, Layout, Monitor, Users, Activity, Settings, RefreshCcw,
-    Maximize2, Smartphone, BadgeCheck, Download, Sun, Moon, Grid, ShieldCheck
+    Maximize2, Smartphone, BadgeCheck, Download, Sun, Moon, Grid, ShieldCheck,
+    Layers, Circle, Crop, Code2
 } from 'lucide-react';
+
+type ExportBg      = 'transparent' | 'white' | 'black' | 'navy' | 'blueprint';
+type ExportVariant = 'color' | 'bw' | 'white-on-dark' | 'black-on-light';
+
+function getVariantFilter(variant: ExportVariant): string {
+    switch (variant) {
+        case 'bw':             return 'grayscale(100%)';
+        case 'white-on-dark':  return 'brightness(0) invert(1)';
+        case 'black-on-light': return 'brightness(0)';
+        default:               return 'none';
+    }
+}
+
+function getExportBgColor(bg: ExportBg): string | undefined {
+    const map: Record<ExportBg, string | undefined> = {
+        transparent: undefined,
+        white:       '#FFFFFF',
+        black:       '#000000',
+        navy:        '#010409',
+        blueprint:   '#002147',
+    };
+    return map[bg];
+}
+
+function downloadSVG(
+    variant: 'color' | 'white' | 'black' | 'mono',
+    logoFill: string,
+    goldFill: string
+) {
+    const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358.846 350.3">
+  <defs>
+    <mask id="inspiron-gap" x="-1075.154" y="-1075" width="3000" height="3000" maskUnits="userSpaceOnUse">
+      <path fill="#fff" d="M-1075.154-1075h3000v3000h-3000z"/>
+      <path d="M321.346 350c-10.6-1-19.3-6.1-26-15.3-.3-.6-4.3-7.3-10-16.5-49.2-81.1-52.8-87.8-52.6-88.4 5.5-8.8 19.4-31.2 27.4-43.8 3.3-5.4 5.7-9 6-9.4 1.6 2.7 27.4 45.3 49.4 81.8 17 28.2 31.9 52.8 32.2 53.5 4.2 7 4.2 15.2 0 22.5-5.2 9-15.4 14.9-25.6 14.9h-.8z" style="fill:none;stroke:#000;stroke-width:24px"/>
+    </mask>
+  </defs>
+  <g mask="url(#inspiron-gap)">
+    <path d="M87.046 349.3c-30.8 0-57.9-14.8-74.3-40.9-15.4-24.2-16.9-55-4.2-80.5 7.8-14.2 32.9-53.9 57.4-92.4 15.1-23.7 29.3-46.1 39.3-62.6 2.7-4.3 4.8-7.8 8.4-11.5 11.4-13.1 28.1-20.6 45.6-20.6s33.8 8.1 43.8 22.1c5.5 7.8,9.1,16.9,10.3 26.4.3 2.5-.4 4.8-2.1 7.5-1.9 3.3-21.8 34.6-21.8 34.6-.6.9-1.2 1.9-1.8 2.8-1.3 2.2-2.4 4.2-3.9 4.2s-1.2-.3-1.8-.9c-4.2-4.9-8.2-11.5-12-18-2.4-4-4.5-7.9-6.9-11.2-1.8-2.8-4.8-4.5-7.8-4.5s-4.2 1-5.8 3c-5.2 8.1-27.5 43.8-45.6 72.7-11.8 18.9-22.1 35.3-25.4 40.4-2.2 3.6-5.2 8.1-7.9 12.5-1.6 2.7-3.3 5.4-4.8 7.8-.6 1-1.3 2.1-1.9 3.1-2.5 4-4.6 7.5-6.1 11.1-5.2 12.4-.4 27.3 10.9 34.6,5.5 3.6 11.4 5.4 17.5 5.4 12.3 0,25-7.6,32.9-20,5.5-8.1,23.6-37,45-70.6,31.7-50.4 67.9-107.5 76.1-118.7 6.3-6.7 14.5-10.8 22.7-10.8 9.3 0,18.2 5.1,23.2 13.1,4.8 7.9 5.4 16.8 1 24.7-3.6 7-6.6 11.3-10.9 18-3.1 4.9-7.3 11.2-13 20.6-14.4 22.5-31 48.7-47 74.2-24.4 38.9-47.7 75.7-55.3 86.8-17.5 24.1-45.5 38.6-75.1 38.6z" fill="${logoFill}"/>
+  </g>
+  <path d="M321.346 350c-10.6-1-19.3-6.1-26-15.3-.3-.6-4.3-7.3-10-16.5-49.2-81.1-52.8-87.8-52.6-88.4 5.5-8.8 19.4-31.2 27.4-43.8 3.3-5.4 5.7-9 6-9.4 1.6 2.7 27.4 45.3 49.4 81.8 17 28.2 31.9 52.8 32.2 53.5 4.2 7 4.2 15.2 0 22.5-5.2 9-15.4 14.9-25.6 14.9h-.8z" fill="${logoFill}"/>
+  <circle cx="321.346" cy="37.5" r="37.5" fill="${goldFill}"/>
+</svg>`;
+    const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `inspiron-logo-${variant}.svg`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
 
 /**
  * ─── ASSET COMMAND NODE: INSTITUTIONAL EQUILIBRIUM EDITION ──────────────────
@@ -27,7 +78,8 @@ type ActiveMode =
     | 'instagram' | 'instagram-profile' | 'whatsapp' | 'whatsapp-business' | 'whatsapp-business-cover'
     | 'profile' | 'audit'
     | 'upwork-hero' | 'upwork-before-after' | 'upwork-process' | 'upwork-pricing'
-    | 'forum-header' | 'forum-card';
+    | 'forum-header' | 'forum-card'
+    | 'logo-square' | 'logo-round' | 'logo-custom' | 'logo-svg';
 
 
 const PLATFORMS = [
@@ -66,6 +118,11 @@ const PLATFORMS = [
     // Manager.io Forum
     { id: 'forum-header', icon: Layout, label: 'Forum Header', canvas: '1110×300' },
     { id: 'forum-card', icon: Users, label: 'Forum Card', canvas: '590×300' },
+    // Brand Logo
+    { id: 'logo-square', icon: Layers, label: 'Logo Square', canvas: 'Custom' },
+    { id: 'logo-round',  icon: Circle, label: 'Logo Round',  canvas: 'Custom' },
+    { id: 'logo-custom', icon: Crop,   label: 'Logo Custom', canvas: 'Custom' },
+    { id: 'logo-svg',    icon: Code2,  label: 'Logo SVG',    canvas: 'Vector' },
 ] as const;
 
 
@@ -87,7 +144,7 @@ const NAV_GROUPS = [
         modes: ['whatsapp', 'whatsapp-business', 'whatsapp-business-cover'],
     },
     {
-        id: 'utility', label: 'Utility', dot: '#FFD700',
+        id: 'brand-tools', label: 'Brand Tools', dot: '#FFD700',
         modes: ['profile', 'audit'],
     },
     {
@@ -97,6 +154,10 @@ const NAV_GROUPS = [
     {
         id: 'forum', label: 'Forum', dot: '#00D2FF',
         modes: ['forum-header', 'forum-card'],
+    },
+    {
+        id: 'brand', label: 'Brand', dot: '#FFD700',
+        modes: ['logo-square', 'logo-round', 'logo-custom', 'logo-svg'],
     },
 ] as const;
 
@@ -127,6 +188,10 @@ const MODE_SCALES: Record<ActiveMode, number> = {
     'upwork-pricing': 0.38,
     'forum-header': 0.6,
     'forum-card': 0.9,
+    'logo-square': 0.8,
+    'logo-round':  0.8,
+    'logo-custom': 0.7,
+    'logo-svg':    0.8,
 };
 
 // ─── TECHNICAL COMPONENT PRIMITIVES ─────────────────────────────────────────
@@ -213,6 +278,20 @@ export default function SocialAssetsPage() {
 
 
     const [isExporting, setIsExporting] = useState(false);
+    const [activeGroup, setActiveGroup] = useState<string | null>(null);
+    const [logoData, setLogoData] = useState({
+        size: 500,
+        customW: 500,
+        customH: 500,
+        variant: 'color' as 'color' | 'white' | 'black' | 'mono',
+    });
+    const [exportConfig, setExportConfig] = useState({
+        bg:      'transparent' as ExportBg,
+        variant: 'color'       as ExportVariant,
+        scale:   2             as 1 | 2 | 3,
+        padding: 0,
+        format:  'png'         as 'png' | 'jpg' | 'svg',
+    });
 
     const [profileData, setProfileData] = useState({
         initials: "IT",
@@ -272,8 +351,29 @@ export default function SocialAssetsPage() {
         }
     };
     const theme = getTheme();
+    // ─── COMPUTED LOGO VALUES ────────────────────────────────────────────────
+    const logoW = activeMode === 'logo-custom' ? logoData.customW :
+                  logoData.size === 0 ? logoData.customW : logoData.size;
+    const logoH = activeMode === 'logo-custom' ? logoData.customH :
+                  logoData.size === 0 ? logoData.customH : logoData.size;
+    const logoFill = logoData.variant === 'color' ? '#00D2FF'
+                   : logoData.variant === 'white' ? '#FFFFFF'
+                   : logoData.variant === 'black' ? '#000000'
+                   : '#888888';
+    const goldFill = logoData.variant === 'color' ? '#FFD700'
+                   : logoData.variant === 'white' ? '#FFFFFF'
+                   : logoData.variant === 'black' ? '#000000'
+                   : '#CCCCCC';
+    const logoBg = getExportBgColor(exportConfig.bg);
+
     // ─── EXPORT HANDLER ─────────────────────────────────────────────────────
     const handleExport = useCallback(async () => {
+        // SVG vector path — bypasses html2canvas
+        if (exportConfig.format === 'svg' && activeMode === 'logo-svg') {
+            downloadSVG(logoData.variant, logoFill, goldFill);
+            return;
+        }
+
         const target = document.querySelector('[data-export-canvas]') as HTMLElement;
         if (!target) return;
         setIsExporting(true);
@@ -281,49 +381,47 @@ export default function SocialAssetsPage() {
         const safeZones = document.querySelectorAll('[data-safezone]');
         safeZones.forEach(el => (el as HTMLElement).style.display = 'none');
 
-        const isUpwork = activeMode.startsWith('upwork-');
         try {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const html2canvas = (await import('html2canvas' as any)).default;
-            const scaleWrapper = target.parentElement as HTMLElement;
-            const prevTransform = scaleWrapper?.style.transform ?? '';
-            if (scaleWrapper) scaleWrapper.style.transform = 'scale(1) translate(0,0)';
 
-            // FIX 1: Tailwind arbitrary bg classes (e.g. bg-[#002147]) aren't resolved by
-            // getComputedStyle in the html2canvas context. Use an explicit renderMode lookup.
-            const bgLookup: Record<string, string> = {
-                dark: '#010409',
-                blueprint: '#002147',
-                light: '#f1f5f9',
-            };
-            const canvasBg = bgLookup[renderMode] ?? '#010409';
+            // Apply variant filter temporarily
+            const prevFilter = target.style.filter;
+            target.style.filter = getVariantFilter(exportConfig.variant);
 
-            // FIX 2: html2canvas cannot render CSS blur() filters — glow orb divs become
-            // solid blobs. Find elements whose class list includes a token starting with "blur-["
-            // (e.g. blur-[120px]) and hide them before capture, then restore.
-            // We specifically exclude backdrop-blur-* tokens which are metric boxes, not orbs.
+            // Apply padding
+            const prevPadding = target.style.padding;
+            if (exportConfig.padding > 0) target.style.padding = `${exportConfig.padding}px`;
+
+            // Hide blur orbs (html2canvas renders CSS blur as solid blobs)
             const blurOrbs = Array.from(target.querySelectorAll<HTMLElement>('[class]')).filter(el => {
                 const cls = typeof el.className === 'string' ? el.className : '';
                 return cls.split(' ').some(token => token.startsWith('blur-['));
             });
             blurOrbs.forEach(el => el.style.setProperty('visibility', 'hidden', 'important'));
 
+            const bgColor = getExportBgColor(exportConfig.bg);
+            const isUpwork = activeMode.startsWith('upwork-');
+            const isJpg = exportConfig.format === 'jpg' || isUpwork;
+
             const cvs = await html2canvas(target, {
-                scale: 1,
+                scale: exportConfig.scale,
                 useCORS: true,
-                backgroundColor: canvasBg,
+                backgroundColor: bgColor ?? null,
                 logging: false,
                 width: target.offsetWidth,
                 height: target.offsetHeight,
             });
 
-            // Restore blur orb visibility
+            // Restore
+            target.style.filter = prevFilter;
+            target.style.padding = prevPadding;
             blurOrbs.forEach(el => el.style.removeProperty('visibility'));
-            if (scaleWrapper) scaleWrapper.style.transform = prevTransform;
 
+            const ext = isJpg ? 'jpg' : 'png';
             const link = document.createElement('a');
-            link.download = `inspiron_${activeMode}_${Date.now()}.${isUpwork ? 'jpg' : 'png'}`;
-            link.href = cvs.toDataURL(isUpwork ? 'image/jpeg' : 'image/png', isUpwork ? 0.95 : 1.0);
+            link.download = `inspiron_${activeMode}_${exportConfig.scale}x_${Date.now()}.${ext}`;
+            link.href = cvs.toDataURL(isJpg ? 'image/jpeg' : 'image/png', isJpg ? 0.95 : 1.0);
             link.click();
         } catch {
             alert('Export failed — ensure html2canvas is installed: npm i html2canvas');
@@ -331,7 +429,7 @@ export default function SocialAssetsPage() {
             safeZones.forEach(el => (el as HTMLElement).style.display = '');
             setIsExporting(false);
         }
-    }, [activeMode, renderMode]);
+    }, [activeMode, exportConfig, logoData, logoFill, goldFill]);
 
 
     return (
@@ -357,11 +455,18 @@ export default function SocialAssetsPage() {
                         {/* Category tabs */}
                         <div className="flex gap-1 overflow-x-auto scrollbar-none">
                             {NAV_GROUPS.map((group) => {
-                                const isActive = group.modes.includes(activeMode as never);
+                                const isActive = activeGroup === group.id;
                                 return (
                                     <button
                                         key={group.id}
-                                        onClick={() => setActiveMode(group.modes[0] as ActiveMode)}
+                                        onClick={() => {
+                                            if (activeGroup === group.id) {
+                                                setActiveGroup(null); // toggle off = show all
+                                            } else {
+                                                setActiveGroup(group.id);
+                                                setActiveMode(group.modes[0] as ActiveMode);
+                                            }
+                                        }}
                                         className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${isActive
                                             ? 'text-white border-b-2'
                                             : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
@@ -376,7 +481,11 @@ export default function SocialAssetsPage() {
                         </div>
                     </div>
                     <div className="flex gap-1 bg-white/5 p-1 rounded-lg border border-white/5 overflow-x-auto scrollbar-none">
-                        {(PLATFORMS as readonly typeof PLATFORMS[number][]).map((mode) => (
+                        {(PLATFORMS as readonly typeof PLATFORMS[number][]).filter(p => {
+                            if (!activeGroup) return true; // show all when no category selected
+                            const grp = NAV_GROUPS.find(g => g.id === activeGroup);
+                            return grp?.modes.includes(p.id as never) ?? true;
+                        }).map((mode) => (
                             <button
                                 key={mode.id}
                                 onClick={() => setActiveMode(mode.id)}
@@ -575,9 +684,139 @@ export default function SocialAssetsPage() {
                                 </div>
                             </div>
                         )}
+
+                        {/* LOGO CONTROLS */}
+                        {activeMode.startsWith('logo-') && (
+                            <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-300">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] uppercase tracking-widest text-action-gold font-bold font-mono">Shape</label>
+                                    <div className="grid grid-cols-3 gap-2">
+                                        {(['logo-square', 'logo-round', 'logo-custom'] as const).map(m => (
+                                            <button key={m} onClick={() => setActiveMode(m)}
+                                                className={`py-2 rounded text-[10px] font-bold uppercase tracking-widest transition-all ${activeMode === m ? 'bg-electric-cyan text-black' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}>
+                                                {m.replace('logo-', '')}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono">Size</label>
+                                    <div className="grid grid-cols-4 gap-2">
+                                        {[500, 1000, 2000, 0].map(s => (
+                                            <button key={s} onClick={() => setLogoData(prev => ({ ...prev, size: s }))}
+                                                className={`py-2 rounded text-[10px] font-bold font-mono transition-all ${logoData.size === s ? 'bg-electric-cyan text-black' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}>
+                                                {s === 0 ? 'Cust' : s}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    {logoData.size === 0 && (
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <InstitutionalInput label="Width px" value={String(logoData.customW)}
+                                                onChange={v => setLogoData(prev => ({ ...prev, customW: parseInt(v) || 500 }))} />
+                                            <InstitutionalInput label="Height px" value={String(logoData.customH)}
+                                                onChange={v => setLogoData(prev => ({ ...prev, customH: parseInt(v) || 500 }))} />
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono">Variant</label>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {(['color', 'white', 'black', 'mono'] as const).map(v => (
+                                            <button key={v} onClick={() => setLogoData(prev => ({ ...prev, variant: v }))}
+                                                className={`py-2 rounded text-[10px] font-bold uppercase tracking-widest transition-all ${logoData.variant === v ? 'bg-action-gold text-black' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}>
+                                                {v}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                                {activeMode === 'logo-svg' && (
+                                    <div className="p-3 bg-action-gold/5 border border-action-gold/20 rounded text-[10px] text-action-gold/80 font-mono leading-relaxed">
+                                        &gt;&gt; SVG MODE: Export downloads true vector file. No html2canvas used.
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                     </div>
-                    <div className="mt-auto p-6 border-t border-white/10 text-[10px] text-gray-600 font-mono text-center">
-                        INSPIRON_SOCIAL_GENERATOR_V2.13
+
+                    {/* ─── EXPORT CONFIG PANEL (always visible) ─── */}
+                    <div className="p-6 border-t-2 border-white/20 space-y-5">
+                        <div className="flex items-center gap-2">
+                            <Download className="text-action-gold" size={16} />
+                            <h2 className="text-xs font-bold uppercase tracking-widest text-action-gold">Export Config</h2>
+                        </div>
+                        {/* Background */}
+                        <div className="space-y-2">
+                            <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono">Background</label>
+                            <div className="grid grid-cols-5 gap-1.5">
+                                {([
+                                    { id: 'transparent', label: '◻', title: 'Transparent', bg: undefined },
+                                    { id: 'white',       label: 'WHT', title: 'White',       bg: '#FFFFFF' },
+                                    { id: 'black',       label: 'BLK', title: 'Black',       bg: '#111111' },
+                                    { id: 'navy',        label: 'NVY', title: 'Navy',        bg: '#010409' },
+                                    { id: 'blueprint',   label: 'BLU', title: 'Blueprint',   bg: '#002147' },
+                                ] as { id: ExportBg; label: string; title: string; bg?: string }[]).map(opt => (
+                                    <button key={opt.id} title={opt.title}
+                                        onClick={() => setExportConfig(prev => ({ ...prev, bg: opt.id }))}
+                                        className={`h-8 rounded text-[9px] font-bold font-mono uppercase transition-all border ${exportConfig.bg === opt.id ? 'border-electric-cyan text-electric-cyan' : 'border-white/10 text-gray-500 hover:border-white/30'}`}
+                                        style={{ backgroundColor: opt.bg ? opt.bg + '55' : 'transparent' }}>
+                                        {opt.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        {/* Variant */}
+                        <div className="space-y-2">
+                            <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono">Variant Filter</label>
+                            <div className="grid grid-cols-2 gap-2">
+                                {([{ id: 'color', label: 'Color' }, { id: 'bw', label: 'B&W' }, { id: 'white-on-dark', label: 'White' }, { id: 'black-on-light', label: 'Black' }] as { id: ExportVariant; label: string }[]).map(v => (
+                                    <button key={v.id} onClick={() => setExportConfig(prev => ({ ...prev, variant: v.id }))}
+                                        className={`py-2 rounded text-[10px] font-bold uppercase tracking-widest transition-all ${exportConfig.variant === v.id ? 'bg-action-gold text-black' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}>
+                                        {v.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        {/* Scale */}
+                        <div className="space-y-2">
+                            <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono">Export Scale</label>
+                            <div className="grid grid-cols-3 gap-2">
+                                {([1, 2, 3] as const).map(s => (
+                                    <button key={s} onClick={() => setExportConfig(prev => ({ ...prev, scale: s }))}
+                                        className={`py-2 rounded text-[10px] font-bold font-mono transition-all ${exportConfig.scale === s ? 'bg-electric-cyan text-black' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}>
+                                        {s}×{s === 2 ? ' (def)' : s === 3 ? ' 4K' : ''}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        {/* Padding */}
+                        <div className="space-y-2">
+                            <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono">Padding — {exportConfig.padding}px</label>
+                            <input type="range" min={0} max={80} value={exportConfig.padding}
+                                onChange={e => setExportConfig(prev => ({ ...prev, padding: parseInt(e.target.value) }))}
+                                className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-electric-cyan" />
+                        </div>
+                        {/* Format */}
+                        <div className="space-y-2">
+                            <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold font-mono">Format</label>
+                            <div className="grid grid-cols-3 gap-2">
+                                {(['png', 'jpg', 'svg'] as const).map(f => {
+                                    const disabled = f === 'svg' && activeMode !== 'logo-svg';
+                                    return (
+                                        <button key={f} disabled={disabled}
+                                            onClick={() => !disabled && setExportConfig(prev => ({ ...prev, format: f }))}
+                                            className={`py-2 rounded text-[10px] font-bold uppercase font-mono tracking-widest transition-all ${disabled ? 'opacity-30 cursor-not-allowed bg-white/5 text-gray-600' : exportConfig.format === f ? 'bg-electric-cyan text-black' : 'bg-white/5 text-gray-400 hover:bg-white/10'}`}>
+                                            {f.toUpperCase()}{f === 'svg' ? '*' : ''}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                            {activeMode === 'logo-svg' && <p className="text-[9px] text-gray-600 font-mono">* SVG only in Logo SVG mode</p>}
+                        </div>
+                    </div>
+
+                    <div className="p-4 border-t border-white/10 text-[10px] text-gray-600 font-mono text-center">
+                        BRAND_ASSET_STUDIO_V3.0
                     </div>
                 </aside>
 
@@ -1221,6 +1460,52 @@ export default function SocialAssetsPage() {
                             </div>
                         )}
 
+                        {/* Logo canvas — square / round / custom / svg */}
+                        {activeMode.startsWith('logo-') && (
+                            <div style={{ transform: `scale(${scale})` }}
+                                className="transition-transform duration-200 ease-out shadow-2xl origin-center flex-shrink-0 w-fit">
+                                <div
+                                    data-export-canvas
+                                    style={{
+                                        width:           `${logoW}px`,
+                                        height:          `${logoH}px`,
+                                        borderRadius:    activeMode === 'logo-round' ? '50%' : '0',
+                                        overflow:        activeMode === 'logo-round' ? 'hidden' : 'visible',
+                                        backgroundColor: logoBg ?? undefined,
+                                        backgroundImage: !logoBg
+                                            ? 'repeating-conic-gradient(#808080 0% 25%, #b0b0b0 0% 50%) 0 0 / 20px 20px'
+                                            : undefined,
+                                        display:         'flex',
+                                        alignItems:      'center',
+                                        justifyContent:  'center',
+                                        padding:         `${exportConfig.padding}px`,
+                                        boxSizing:       'border-box',
+                                    }}>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 358.846 350.3"
+                                        style={{ width: '100%', height: '100%', display: 'block' }}>
+                                        <defs>
+                                            <mask id="inspiron-gap-logo-export"
+                                                x="-1075.154" y="-1075" width="3000" height="3000" maskUnits="userSpaceOnUse">
+                                                <path fill="#fff" d="M-1075.154-1075h3000v3000h-3000z"/>
+                                                <path d="M321.346 350c-10.6-1-19.3-6.1-26-15.3-.3-.6-4.3-7.3-10-16.5-49.2-81.1-52.8-87.8-52.6-88.4 5.5-8.8 19.4-31.2 27.4-43.8 3.3-5.4 5.7-9 6-9.4 1.6 2.7 27.4 45.3 49.4 81.8 17 28.2 31.9 52.8 32.2 53.5 4.2 7 4.2 15.2 0 22.5-5.2 9-15.4 14.9-25.6 14.9h-.8z"
+                                                    style={{ fill: 'none', stroke: '#000', strokeWidth: '24px' }}/>
+                                            </mask>
+                                        </defs>
+                                        <g mask="url(#inspiron-gap-logo-export)">
+                                            <path d="M87.046 349.3c-30.8 0-57.9-14.8-74.3-40.9-15.4-24.2-16.9-55-4.2-80.5 7.8-14.2 32.9-53.9 57.4-92.4 15.1-23.7 29.3-46.1 39.3-62.6 2.7-4.3 4.8-7.8 8.4-11.5 11.4-13.1 28.1-20.6 45.6-20.6s33.8 8.1 43.8 22.1c5.5 7.8,9.1,16.9,10.3 26.4.3 2.5-.4 4.8-2.1 7.5-1.9 3.3-21.8 34.6-21.8 34.6-.6.9-1.2 1.9-1.8 2.8-1.3 2.2-2.4 4.2-3.9 4.2s-1.2-.3-1.8-.9c-4.2-4.9-8.2-11.5-12-18-2.4-4-4.5-7.9-6.9-11.2-1.8-2.8-4.8-4.5-7.8-4.5s-4.2 1-5.8 3c-5.2 8.1-27.5 43.8-45.6 72.7-11.8 18.9-22.1 35.3-25.4 40.4-2.2 3.6-5.2 8.1-7.9 12.5-1.6 2.7-3.3 5.4-4.8 7.8-.6 1-1.3 2.1-1.9 3.1-2.5 4-4.6 7.5-6.1 11.1-5.2 12.4-.4 27.3 10.9 34.6,5.5 3.6 11.4 5.4 17.5 5.4 12.3 0,25-7.6,32.9-20,5.5-8.1,23.6-37,45-70.6,31.7-50.4 67.9-107.5 76.1-118.7 6.3-6.7 14.5-10.8 22.7-10.8 9.3 0,18.2 5.1,23.2 13.1,4.8 7.9 5.4 16.8 1 24.7-3.6 7-6.6 11.3-10.9 18-3.1 4.9-7.3 11.2-13 20.6-14.4 22.5-31 48.7-47 74.2-24.4 38.9-47.7 75.7-55.3 86.8-17.5 24.1-45.5 38.6-75.1 38.6z" fill={logoFill}/>
+                                        </g>
+                                        <path d="M321.346 350c-10.6-1-19.3-6.1-26-15.3-.3-.6-4.3-7.3-10-16.5-49.2-81.1-52.8-87.8-52.6-88.4 5.5-8.8 19.4-31.2 27.4-43.8 3.3-5.4 5.7-9 6-9.4 1.6 2.7 27.4 45.3 49.4 81.8 17 28.2 31.9 52.8 32.2 53.5 4.2 7 4.2 15.2 0 22.5-5.2 9-15.4 14.9-25.6 14.9h-.8z" fill={logoFill}/>
+                                        <circle cx="321.346" cy="37.5" r="37.5" fill={goldFill}/>
+                                    </svg>
+                                </div>
+                                <div className="mt-2 text-center text-xs text-gray-500 font-mono opacity-50">
+                                    {logoW} × {logoH} PX // {activeMode.toUpperCase().replace(/-/g, '_')}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Export Hint */}
                         <div className="absolute bottom-6 flex items-center gap-4">
                             <button
@@ -1228,11 +1513,20 @@ export default function SocialAssetsPage() {
                                 disabled={isExporting}
                                 className="bg-[#00D2FF]/10 hover:bg-[#00D2FF]/20 disabled:opacity-50 disabled:cursor-wait border border-[#00D2FF]/30 text-[#00D2FF] px-6 py-3 rounded-full flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(0,210,255,0.1)] group">
                                 <Download size={14} className={isExporting ? 'animate-bounce' : 'group-hover:scale-110 transition-transform'} />
-                                {isExporting ? 'EXPORTING...' : activeMode.startsWith('upwork-') ? 'EXPORT JPG' : 'EXPORT PNG'}
+                                {
+                                    isExporting ? 'EXPORTING...' :
+                                    exportConfig.format === 'svg' && activeMode === 'logo-svg' ? 'DOWNLOAD SVG' :
+                                    exportConfig.format === 'jpg' || activeMode.startsWith('upwork-') ? 'EXPORT JPG' :
+                                    'EXPORT PNG'
+                                }
                             </button>
-                            <span className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">
-                                Requires: <code className="text-electric-cyan">npm i html2canvas</code>
-                            </span>
+                            <div className="flex items-center gap-2 text-[9px] font-mono text-gray-600 uppercase tracking-widest">
+                                <span>{exportConfig.bg}</span>
+                                <span>·</span>
+                                <span>{exportConfig.variant}</span>
+                                <span>·</span>
+                                <span>{exportConfig.scale}×</span>
+                            </div>
                         </div>
                     </div>
                 </div>
