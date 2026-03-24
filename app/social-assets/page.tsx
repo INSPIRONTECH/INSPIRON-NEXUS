@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { RefinedIcon } from '@/components/Branding/RefinedLogo';
 import {
     Scale, Layout, Monitor, Users, Activity, Settings, RefreshCcw,
     Maximize2, Smartphone, BadgeCheck, Download, Sun, Moon, Grid, ShieldCheck,
@@ -454,10 +455,10 @@ export default function SocialAssetsPage() {
 
 
     return (
-        <div className="min-h-screen bg-[#010409] text-white font-institutional selection:bg-electric-cyan selection:text-black flex flex-col overflow-hidden">
+        <div className="min-h-screen bg-deep-navy-black text-institutional-white font-institutional selection:bg-electric-cyan selection:text-black flex flex-col overflow-hidden">
 
             {/* ─── HUD ───────────────────────────────────────────────────── */}
-            <nav className="sticky top-0 z-50 bg-[#010409]/90 backdrop-blur-md border-b border-white/10 shrink-0">
+            <nav className="sticky top-0 z-50 bg-deep-navy-black/90 backdrop-blur-md border-b border-white/10 shrink-0">
                 <div className="max-w-[1920px] mx-auto px-6">
                     {/* Row 1: brand + category tabs */}
                     <div className="h-14 flex items-center justify-between gap-4">
@@ -528,7 +529,7 @@ export default function SocialAssetsPage() {
             <main className="flex-1 flex flex-col lg:flex-row lg:h-[calc(100vh-96px)] lg:overflow-hidden min-w-0">
 
                 {/* ─── CONTROLS ──────────────────────────────────────────── */}
-                <aside className="w-full max-h-[50vh] lg:max-h-none lg:w-[420px] bg-[#050a10] border-r border-white/10 overflow-y-auto custom-scrollbar flex flex-col shrink-0 z-10">
+                <aside className="w-full max-h-[50vh] lg:max-h-none lg:w-[420px] bg-deep-navy-black border-r border-white/10 overflow-y-auto custom-scrollbar flex flex-col shrink-0 z-10">
                     <div className="p-6 space-y-8">
                         <div className="flex items-center gap-2 pb-4 border-b border-white/10">
                             <Settings className="text-electric-cyan" size={16} />
@@ -1037,7 +1038,7 @@ export default function SocialAssetsPage() {
                                 <div data-export-canvas className={`w-[1200px] h-[630px] ${theme.bg} relative overflow-hidden flex items-center justify-center text-center ${theme.border} border transition-colors duration-500`}>
                                     <div className={`absolute inset-0 ${theme.grid} [background-size:30px_30px]`} />
                                     <div className="relative z-10 px-24">
-                                        <div className="w-24 h-24 mx-auto mb-8"><MasterLogo idSuffix="fb-post" /></div>
+                                        <div className="w-24 h-24 mx-auto mb-8"><RefinedIcon size={96} /></div>
                                         <h2 className={`text-6xl font-black ${theme.text} uppercase tracking-tight mb-8 whitespace-pre-line font-institutional`}>
                                             {facebookData.headline}
                                         </h2>
@@ -1061,7 +1062,7 @@ export default function SocialAssetsPage() {
                                     <div className="absolute top-0 right-0 w-[800px] h-[800px] blur-[150px] rounded-full opacity-10" style={{ backgroundColor: '#00D2FF' }} />
                                     <div className="absolute bottom-0 left-0 w-[600px] h-[600px] blur-[150px] rounded-full opacity-10" style={{ backgroundColor: '#FFD700' }} />
                                     <div className="relative z-10">
-                                        <div className="w-32 h-32 mb-12"><MasterLogo idSuffix="wa" /></div>
+                                        <div className="w-32 h-32 mb-12"><RefinedIcon size={128} /></div>
                                         <div className="inline-flex items-center gap-3 mb-8">
                                             <span className="px-4 py-2 border text-2xl font-bold rounded uppercase tracking-widest"
                                                 style={{ borderColor: '#00D2FF', color: '#00D2FF' }}>
@@ -1108,7 +1109,7 @@ export default function SocialAssetsPage() {
                                             {profileData.initials}
                                         </div>
                                         <div className={`${activeMode === 'instagram-profile' ? 'w-96 h-96' : 'w-48 h-48'} rounded-full flex items-center justify-center mb-6 border-2 border-white/10 mx-auto overflow-hidden p-8 bg-gray-800/50 backdrop-blur-sm`}>
-                                            <MasterLogo idSuffix="profile-v" />
+                                            <RefinedIcon size={192} />
                                         </div>
                                         <div className="px-6 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest inline-block shadow-[0_0_20px_rgba(255,215,0,0.3)]"
                                             style={{ backgroundColor: '#FFD700', color: '#010409' }}>
@@ -1130,7 +1131,7 @@ export default function SocialAssetsPage() {
                                 <div data-export-canvas className={`w-[1128px] h-[191px] ${theme.bg} relative overflow-hidden flex items-center px-12 ${theme.border} border transition-colors duration-500`}>
                                     <div className={`absolute inset-0 ${theme.grid} [background-size:20px_20px]`} />
                                     <div className="relative z-10 flex items-center gap-12 w-full">
-                                        <div className="w-24 h-24 shrink-0"><MasterLogo idSuffix="li-page" /></div>
+                                        <div className="w-24 h-24 shrink-0"><RefinedIcon size={96} /></div>
                                         <div>
                                             <h2 className={`text-4xl font-black ${theme.text} uppercase tracking-tight font-institutional`}>
                                                 {linkedinData.headline} <span style={{ color: '#FFD700' }}>{linkedinData.highlight}</span>
@@ -1152,7 +1153,7 @@ export default function SocialAssetsPage() {
                                 <div data-export-canvas className={`${activeMode === 'instagram' ? 'w-[1080px] h-[1080px]' : 'w-[1200px] h-[627px]'} ${theme.bg} relative overflow-hidden flex items-center justify-center text-center p-24 ${theme.border} border transition-colors duration-500`}>
                                     <div className={`absolute inset-0 ${theme.grid} [background-size:40px_40px]`} />
                                     <div className="relative z-10">
-                                        <div className="w-32 h-32 mx-auto mb-10"><MasterLogo idSuffix="social-post" /></div>
+                                        <div className="w-32 h-32 mx-auto mb-10"><RefinedIcon size={96} /></div>
                                         <h2 className={`text-7xl font-black ${theme.text} uppercase tracking-tight mb-8 leading-tight font-institutional`}>
                                             {activeMode === 'instagram' ? instagramData.headline : linkedinData.headline}<br />
                                             <span style={{ color: '#FFD700' }}>{activeMode === 'instagram' ? instagramData.highlight : linkedinData.highlight}</span>
@@ -1223,7 +1224,7 @@ export default function SocialAssetsPage() {
                         {/* 9. UPWORK HERO (1600 × 1200) */}
                         {activeMode === 'upwork-hero' && (
                             <div style={{ transform: `scale(${scale})` }} className="transition-transform duration-200 ease-out shadow-2xl origin-center flex-shrink-0 w-fit">
-                                <div data-export-canvas className="w-[1600px] h-[1200px] bg-[#010409] text-white relative overflow-hidden flex items-center justify-center">
+                                <div data-export-canvas className="w-[1600px] h-[1200px] bg-deep-navy-black text-institutional-white relative overflow-hidden flex items-center justify-center">
                                     <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] [background-size:40px_40px]" />
                                     <div className="absolute right-0 top-0 w-[1000px] h-[1000px] blur-[200px] rounded-full opacity-20" style={{ backgroundColor: '#00D2FF' }} />
                                     <div className="absolute left-[-200px] bottom-[-200px] w-[800px] h-[800px] blur-[200px] rounded-full opacity-10" style={{ backgroundColor: '#FFD700' }} />
@@ -1232,7 +1233,7 @@ export default function SocialAssetsPage() {
                                         <div className="flex flex-col items-center justify-center gap-8">
                                             <div className="flex items-center gap-6 mb-4">
                                                 {/* FIX: explicit size so MasterLogo doesn't overflow */}
-                                                <div className="w-20 h-20 flex-shrink-0"><MasterLogo idSuffix="uw-hero" /></div>
+                                                <div className="w-20 h-20 flex-shrink-0"><RefinedIcon size={80} /></div>
                                                 <div className="flex items-baseline leading-none pt-2">
                                                     <span className="text-5xl font-medium lowercase text-white tracking-tighter">inspiron</span>
                                                     <span className="text-4xl font-light uppercase text-[#FFD700] ml-2 tracking-[0.2em]">TECH</span>
@@ -1267,13 +1268,13 @@ export default function SocialAssetsPage() {
                         {/* 10. UPWORK BEFORE/AFTER (1600 × 1200) */}
                         {activeMode === 'upwork-before-after' && (
                             <div style={{ transform: `scale(${scale})` }} className="transition-transform duration-200 ease-out shadow-2xl origin-center flex-shrink-0 w-fit">
-                                <div data-export-canvas className="w-[1600px] h-[1200px] bg-[#010409] text-white relative overflow-hidden flex items-center justify-center">
+                                <div data-export-canvas className="w-[1600px] h-[1200px] bg-deep-navy-black text-institutional-white relative overflow-hidden flex items-center justify-center">
                                     <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] [background-size:40px_40px]" />
                                     <div className="absolute right-0 top-0 w-1/2 h-full blur-[200px] opacity-10 bg-[#00D2FF]" />
                                     <div className="absolute left-0 top-0 w-1/2 h-full blur-[200px] opacity-10 bg-rose-500" />
 
                                     <div className="absolute top-12 left-1/2 -translate-x-1/2 flex items-center gap-4 z-30 opacity-60">
-                                        <div className="w-10 h-10 text-white"><MasterLogo idSuffix="uw-ba" /></div>
+                                        <div className="w-10 h-10 text-white"><RefinedIcon size={80} /></div>
                                         <div className="flex items-baseline"><span className="text-2xl font-medium lowercase text-white tracking-tighter">inspiron</span><span className="text-xl font-light uppercase text-[#FFD700] ml-2 tracking-[0.2em]">TECH</span></div>
                                     </div>
 
@@ -1290,7 +1291,7 @@ export default function SocialAssetsPage() {
                                             <h3 className="text-[#00D2FF] text-5xl font-light tracking-wide mt-12 mb-16 leading-tight">Stable Manager.io<br />accounting core</h3>
                                             <div className="flex flex-col gap-8 flex-1 justify-center">
                                                 {[{ icon: '📈', label: 'P&L Statement', badge: 'Synced', color: '#22c55e' }, { icon: '🏦', label: 'Balance Sheet', badge: 'Audit-Ready', color: '#00D2FF' }, { icon: '💸', label: 'Cash Flow', badge: 'Accurate', color: '#FFD700' }].map((r, i) => (
-                                                    <div key={i} className="bg-[#050a10] border border-[#00D2FF]/20 rounded-2xl p-10 flex items-center gap-8">
+                                                    <div key={i} className="bg-deep-navy-black border border-[#00D2FF]/20 rounded-2xl p-10 flex items-center gap-8">
                                                         <span className="text-5xl">{r.icon}</span>
                                                         <div className="flex-1 text-4xl font-bold">{r.label}</div>
                                                         <div className="font-mono text-2xl px-5 py-3 rounded-lg border" style={{ color: r.color, borderColor: r.color + '40', backgroundColor: r.color + '15' }}>{r.badge}</div>
@@ -1307,13 +1308,13 @@ export default function SocialAssetsPage() {
                         {/* 11. UPWORK PROCESS (1600 × 1200) */}
                         {activeMode === 'upwork-process' && (
                             <div style={{ transform: `scale(${scale})` }} className="transition-transform duration-200 ease-out shadow-2xl origin-center flex-shrink-0 w-fit">
-                                <div data-export-canvas className="w-[1600px] h-[1200px] bg-[#010409] text-white relative overflow-hidden flex items-center justify-center">
+                                <div data-export-canvas className="w-[1600px] h-[1200px] bg-deep-navy-black text-institutional-white relative overflow-hidden flex items-center justify-center">
                                     <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] [background-size:40px_40px]" />
                                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] blur-[200px] opacity-10 bg-[#00D2FF]" />
 
                                     <div className="relative z-10 w-full max-w-[1400px] mx-auto text-center px-10 flex flex-col justify-center h-full">
                                         <div className="flex items-center justify-center gap-6 mb-12 opacity-80">
-                                            <div className="w-16 h-16"><MasterLogo idSuffix="uw-process" /></div>
+                                            <div className="w-16 h-16"><RefinedIcon size={80} /></div>
                                             <div className="flex items-baseline"><span className="text-4xl font-medium lowercase text-white tracking-tighter">inspiron</span><span className="text-3xl font-light uppercase text-[#FFD700] ml-2 tracking-[0.2em]">TECH</span></div>
                                         </div>
                                         <h2 className="text-7xl font-black uppercase tracking-tight mb-24 font-institutional inline-block border-b-2 pb-8" style={{ borderColor: '#00D2FF' }}>
@@ -1338,13 +1339,13 @@ export default function SocialAssetsPage() {
                         {/* 12. UPWORK PRICING (1600 × 1200) */}
                         {activeMode === 'upwork-pricing' && (
                             <div style={{ transform: `scale(${scale})` }} className="transition-transform duration-200 ease-out shadow-2xl origin-center flex-shrink-0 w-fit">
-                                <div data-export-canvas className="w-[1600px] h-[1200px] bg-[#010409] text-white relative overflow-hidden flex items-center justify-center">
+                                <div data-export-canvas className="w-[1600px] h-[1200px] bg-deep-navy-black text-institutional-white relative overflow-hidden flex items-center justify-center">
                                     <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] [background-size:40px_40px]" />
                                     <div className="absolute top-0 right-0 w-[1000px] h-[1000px] blur-[250px] rounded-full opacity-10" style={{ backgroundColor: '#00D2FF' }} />
 
                                     <div className="relative z-10 w-full max-w-[1400px] mx-auto text-center px-8 flex flex-col justify-center h-full py-16">
                                         <div className="flex items-center justify-center gap-6 mb-12 opacity-80">
-                                            <div className="w-16 h-16"><MasterLogo idSuffix="uw-price" /></div>
+                                            <div className="w-16 h-16"><RefinedIcon size={80} /></div>
                                             <div className="flex items-baseline"><span className="text-4xl font-medium lowercase text-white tracking-tighter">inspiron</span><span className="text-3xl font-light uppercase text-[#FFD700] ml-2 tracking-[0.2em]">TECH</span></div>
                                         </div>
                                         <h2 className="text-6xl font-black uppercase tracking-tight mb-20 font-institutional">Choose Your ERP Package</h2>
@@ -1382,7 +1383,7 @@ export default function SocialAssetsPage() {
                                     {/* Left: Logo + Identity */}
                                     <div className="relative z-10 flex items-center gap-12">
                                         <div className="w-[100px] h-[100px] flex-shrink-0">
-                                            <MasterLogo idSuffix="forum-hdr" />
+                                            <RefinedIcon size={100} />
                                         </div>
                                         <div>
                                             <div className="flex items-baseline gap-3 mb-1">
@@ -1424,7 +1425,7 @@ export default function SocialAssetsPage() {
                                     {/* Content */}
                                     <div className="relative z-10 flex flex-col items-center gap-4">
                                         <div className="w-[70px] h-[70px]">
-                                            <MasterLogo idSuffix="forum-card" />
+                                            <RefinedIcon size={70} />
                                         </div>
                                         <div className="text-center">
                                             <div className="flex items-baseline gap-2 justify-center">
@@ -1453,7 +1454,7 @@ export default function SocialAssetsPage() {
                                     )}
                                     {/* Logo + Spine Overlay */}
                                     <div className="relative z-10 w-[400px] h-[400px]">
-                                        <MasterLogo idSuffix="audit" />
+                                        <RefinedIcon size={400} />
                                         <svg className="absolute inset-0 w-full h-full pointer-events-none">
                                             {auditState.spine && (
                                                 <>
