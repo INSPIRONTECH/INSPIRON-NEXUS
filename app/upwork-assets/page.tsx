@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { RefinedLogo, RefinedIcon } from '@/components/Branding/RefinedLogo';
-import { Download, ChevronRight, Info } from 'lucide-react';
+import { Download, Info } from 'lucide-react';
 
 /* ─── TYPES ─────────────────────────────────────────────────────────────── */
 type ActiveMode = 'uw-hero' | 'uw-before-after' | 'uw-process' | 'uw-pricing';
@@ -25,16 +25,11 @@ interface UpworkData {
    tracking-* classes. This object provides safe defaults.
    ──────────────────────────────────────────────────────────────────────── */
 const T = {
-    /** Normal body text — ensures spaces render */
     normal: { wordSpacing: '0.15em', letterSpacing: '0px' } as React.CSSProperties,
-    /** Tight headline — slightly reduced but still visible spaces */
-    tight: { wordSpacing: '0.12em', letterSpacing: '-0.01em' } as React.CSSProperties,
-    /** Wide tracked labels (uppercase) */
-    wide: { wordSpacing: '0.25em', letterSpacing: '0.2em' } as React.CSSProperties,
-    /** Extra-wide tracked (badges, tags) */
-    xwide: { wordSpacing: '0.3em', letterSpacing: '0.3em' } as React.CSSProperties,
-    /** Monospace text */
-    mono: { wordSpacing: '0.2em', letterSpacing: '0.05em', fontFamily: 'monospace' } as React.CSSProperties,
+    tight:  { wordSpacing: '0.12em', letterSpacing: '-0.01em' } as React.CSSProperties,
+    wide:   { wordSpacing: '0.25em', letterSpacing: '0.2em' } as React.CSSProperties,
+    xwide:  { wordSpacing: '0.3em',  letterSpacing: '0.3em' } as React.CSSProperties,
+    mono:   { wordSpacing: '0.2em',  letterSpacing: '0.05em', fontFamily: 'monospace' } as React.CSSProperties,
 };
 
 /* ─── PRESETS ────────────────────────────────────────────────────────────── */
@@ -80,10 +75,10 @@ const SidebarInput = ({ label, value, onChange }: { label: string; value: string
 
 /* ─── PROCESS STEPS DATA ─────────────────────────────────────────────────── */
 const PROCESS_STEPS = [
-    { num: '01', emoji: '🔍', title: 'AUDIT', color: '#00D2FF', sub: 'Understand your business' },
-    { num: '02', emoji: '✏️', title: 'DESIGN', color: '#FFD700', sub: 'Build your Chart of Accounts' },
+    { num: '01', emoji: '🔍', title: 'AUDIT',     color: '#00D2FF', sub: 'Understand your business' },
+    { num: '02', emoji: '✏️', title: 'DESIGN',    color: '#FFD700', sub: 'Build your Chart of Accounts' },
     { num: '03', emoji: '🔄', title: 'MIGRATION', color: '#22c55e', sub: 'Configure & migrate data' },
-    { num: '04', emoji: '🎓', title: 'TRAINING', color: '#00D2FF', sub: 'Train, verify, launch' },
+    { num: '04', emoji: '🎓', title: 'TRAINING',  color: '#00D2FF', sub: 'Train, verify, launch' },
 ];
 
 /* ─── PRICING TIERS ──────────────────────────────────────────────────────── */
@@ -106,10 +101,12 @@ const PRICING_TIERS = [
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   UPWORK PORTFOLIO ASSET STUDIO — V2.1
+   UPWORK PORTFOLIO ASSET STUDIO — V2.2
    INSPIRON TECH · MD ABU HASAN
    4 canvas modes · 1600×1200px · JPG 0.95 export
-   FIX: html2canvas word-spacing collapse — all canvas text uses inline styles
+   FIX V2.2: Hero canvas layout — reduced font sizes, fixed text collision,
+             whiteSpace nowrap on highlight, removed subtext border artifact,
+             replaced Tailwind className flex with inline styles in canvas
    ═══════════════════════════════════════════════════════════════════════════ */
 
 export default function UpworkAssetsStudio() {
@@ -126,7 +123,6 @@ export default function UpworkAssetsStudio() {
         website: 'inspiron.tech',
     });
 
-    // Canvas auto-scaling
     const [scale, setScale] = useState(0.38);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -145,24 +141,18 @@ export default function UpworkAssetsStudio() {
         return () => window.removeEventListener('resize', calculateScale);
     }, [calculateScale]);
 
-    /* ─── EXPORT ──────────────────────────────────────────────────────────── 
-       Primary: dom-to-image-more (SVG foreignObject — preserves word spacing)
-       Fallback: html2canvas (if dom-to-image fails)
-       Best: DevTools → Inspect canvas → Capture node screenshot
-       ──────────────────────────────────────────────────────────────────────── */
+    /* ─── EXPORT ──────────────────────────────────────────────────────────── */
     const handleExport = async () => {
         setIsExporting(true);
         try {
             const el = document.getElementById('data-export-canvas');
             if (!el) return;
 
-            // Hide blur orbs before capture (both engines render them poorly)
             const orbs = el.querySelectorAll<HTMLElement>('[data-blur-orb]');
             orbs.forEach(o => (o.style.display = 'none'));
 
             let dataUrl: string | null = null;
 
-            // PRIMARY: dom-to-image-more (SVG foreignObject — correct text rendering)
             try {
                 const domtoimage = await import('dom-to-image-more');
                 dataUrl = await domtoimage.default.toJpeg(el, {
@@ -170,16 +160,12 @@ export default function UpworkAssetsStudio() {
                     bgcolor: '#010409',
                     width: 1600,
                     height: 1200,
-                    style: {
-                        transform: 'none',
-                        transformOrigin: 'top left',
-                    },
+                    style: { transform: 'none', transformOrigin: 'top left' },
                 });
             } catch (domErr) {
                 console.warn('dom-to-image failed, falling back to html2canvas:', domErr);
             }
 
-            // FALLBACK: html2canvas
             if (!dataUrl) {
                 const { default: html2canvas } = await import('html2canvas');
                 const canvas = await html2canvas(el, {
@@ -192,7 +178,6 @@ export default function UpworkAssetsStudio() {
                 dataUrl = canvas.toDataURL('image/jpeg', 0.95);
             }
 
-            // Restore orbs
             orbs.forEach(o => (o.style.display = ''));
 
             if (dataUrl) {
@@ -208,7 +193,6 @@ export default function UpworkAssetsStudio() {
         }
     };
 
-    /* ─── PRESET LOADER ───────────────────────────────────────────────────── */
     const applyPreset = (key: string) => {
         const p = PRESETS[key];
         if (p) setUwData(prev => ({ ...prev, ...p }));
@@ -216,46 +200,114 @@ export default function UpworkAssetsStudio() {
 
     /* ─── CANVAS RENDERERS ────────────────────────────────────────────────── */
 
+    /* ── HERO (V2.2 FIXED) ──────────────────────────────────────────────────
+       Changes vs V2.1:
+       • Headline font-size: 110px → 88px  (prevents overflow at 1600px width)
+       • Headline marginBottom: 16px → 32px (clear gap before highlight)
+       • Headline whiteSpace: nowrap
+       • Highlight font-size: 85px → 68px  (fits without wrapping)
+       • Highlight whiteSpace: nowrap, border: none, background: none, padding: 0
+       • Subtext font-size: 30px → 26px, border: none, background: none, padding: 0
+       • Logo wordmark: Tailwind className → inline style (safe for export canvas)
+       • Tag badge: whiteSpace: nowrap added
+    ────────────────────────────────────────────────────────────────────────── */
     const renderHero = () => (
-        <div className="flex flex-col items-center justify-center h-full text-center">
-            {/* Logo + Wordmark */}
-            <div className="flex items-center gap-4 mb-10">
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center' }}>
+            {/* Logo + Wordmark — inline only, no Tailwind inside canvas */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '40px' }}>
                 <RefinedIcon size={64} />
-                <div className="flex items-baseline">
-                    <span style={{ fontSize: '28px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '26px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '6px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>TECH</span>
+                <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <span style={{ fontSize: '28px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Inter, sans-serif', ...T.normal }}>inspiron</span>
+                    <span style={{ fontSize: '26px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '6px', fontFamily: 'Inter, sans-serif', ...T.normal }}>TECH</span>
                 </div>
             </div>
 
             {/* Tag Badge */}
-            <div style={{ padding: '16px 40px', border: '1px solid rgba(0,210,255,0.3)', backgroundColor: 'rgba(0,210,255,0.06)', color: '#00D2FF', fontWeight: 700, textTransform: 'uppercase', borderRadius: '9999px', marginBottom: '56px', fontSize: '20px', ...T.xwide }}>
+            <div style={{
+                padding: '14px 40px',
+                border: '1px solid rgba(0,210,255,0.35)',
+                backgroundColor: 'rgba(0,210,255,0.07)',
+                color: '#00D2FF',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                borderRadius: '9999px',
+                marginBottom: '48px',
+                fontSize: '18px',
+                whiteSpace: 'nowrap',
+                ...T.xwide,
+            }}>
                 {uwData.tag}
             </div>
 
-            {/* Headline */}
-            <h1 style={{ fontSize: '110px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.05, marginBottom: '16px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.tight }}>
+            {/* Headline — FIX: 88px, gap 32px, nowrap */}
+            <h1 style={{
+                fontSize: '88px',
+                fontWeight: 900,
+                color: '#FFFFFF',
+                lineHeight: 1.05,
+                marginBottom: '32px',
+                fontFamily: 'Inter, sans-serif',
+                whiteSpace: 'nowrap',
+                ...T.tight,
+            }}>
                 {uwData.headline}
             </h1>
-            <h2 style={{ fontSize: '85px', fontWeight: 300, color: '#FFD700', lineHeight: 1.15, marginBottom: '56px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', fontStyle: 'italic', ...T.normal }}>
+
+            {/* Highlight — FIX: 68px, nowrap, border none */}
+            <h2 style={{
+                fontSize: '68px',
+                fontWeight: 300,
+                color: '#FFD700',
+                lineHeight: 1.2,
+                marginBottom: '48px',
+                fontFamily: 'Inter, sans-serif',
+                fontStyle: 'italic',
+                whiteSpace: 'nowrap',
+                border: 'none',
+                background: 'none',
+                padding: 0,
+                ...T.normal,
+            }}>
                 {uwData.highlight}
             </h2>
 
-            {/* Subtext */}
-            <p style={{ fontSize: '30px', color: '#9CA3AF', maxWidth: '1000px', lineHeight: 1.6, marginBottom: '80px', ...T.normal }}>
+            {/* Subtext — FIX: 26px, border none, padding 0 */}
+            <p style={{
+                fontSize: '26px',
+                color: '#9CA3AF',
+                maxWidth: '1100px',
+                lineHeight: 1.6,
+                marginBottom: '56px',
+                border: 'none',
+                background: 'none',
+                padding: 0,
+                ...T.normal,
+            }}>
                 {uwData.subtext}
             </p>
 
             {/* Bottom Cards */}
-            <div style={{ display: 'flex', gap: '32px' }}>
+            <div style={{ display: 'flex', gap: '28px' }}>
                 {[
                     { icon: '📊', label: 'P&L Statement', sub: 'Revenue  ·  Expenses  ·  Net' },
-                    { icon: '🏦', label: 'Balance Sheet', sub: 'Assets  ·  Liabilities  ·  Equity' },
-                    { icon: '💸', label: 'Cash Flow', sub: 'Inflow  ·  Outflow  ·  Reserves' },
+                    { icon: '🏦', label: 'Balance Sheet',  sub: 'Assets  ·  Liabilities  ·  Equity' },
+                    { icon: '💸', label: 'Cash Flow',      sub: 'Inflow  ·  Outflow  ·  Reserves' },
                 ].map(c => (
-                    <div key={c.label} style={{ backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(0,210,255,0.2)', borderRadius: '16px', padding: '32px 48px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', boxShadow: '0 0 24px rgba(0,210,255,0.08)', minWidth: '280px' }}>
-                        <span style={{ fontSize: '36px' }}>{c.icon}</span>
-                        <span style={{ fontSize: '24px', color: '#00D2FF', fontWeight: 600, ...T.normal }}>{c.label}</span>
-                        <span style={{ fontSize: '14px', color: '#6B7280', ...T.mono }}>{c.sub}</span>
+                    <div key={c.label} style={{
+                        backgroundColor: 'rgba(255,255,255,0.04)',
+                        border: '1px solid rgba(0,210,255,0.2)',
+                        borderRadius: '16px',
+                        padding: '28px 44px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '10px',
+                        boxShadow: '0 0 24px rgba(0,210,255,0.08)',
+                        minWidth: '260px',
+                    }}>
+                        <span style={{ fontSize: '34px' }}>{c.icon}</span>
+                        <span style={{ fontSize: '22px', color: '#00D2FF', fontWeight: 600, ...T.normal }}>{c.label}</span>
+                        <span style={{ fontSize: '13px', color: '#6B7280', ...T.mono }}>{c.sub}</span>
                     </div>
                 ))}
             </div>
@@ -264,26 +316,21 @@ export default function UpworkAssetsStudio() {
 
     const renderBeforeAfter = () => (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            {/* Top watermark */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px', opacity: 0.6 }}>
                 <RefinedIcon size={36} />
-                <div className="flex items-baseline">
-                    <span style={{ fontSize: '18px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '16px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>TECH</span>
+                <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <span style={{ fontSize: '18px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Inter, sans-serif', ...T.normal }}>inspiron</span>
+                    <span style={{ fontSize: '16px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Inter, sans-serif', ...T.normal }}>TECH</span>
                 </div>
             </div>
 
-            {/* Two Panels */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', flex: 1 }}>
                 {/* BEFORE */}
                 <div style={{ backgroundColor: 'rgba(10,5,5,0.8)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '24px', padding: '56px', position: 'relative', overflow: 'hidden' }}>
                     <div style={{ position: 'absolute', top: 0, right: '32px', transform: 'translateY(-50%)', backgroundColor: 'rgba(127,29,29,0.9)', color: '#FFFFFF', padding: '12px 32px', borderRadius: '9999px', fontWeight: 700, textTransform: 'uppercase', border: '1px solid rgba(239,68,68,0.5)', fontSize: '18px', zIndex: 10, ...T.wide }}>Before</div>
-
-                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#f87171', marginBottom: '32px', marginTop: '16px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>
+                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#f87171', marginBottom: '32px', marginTop: '16px', fontFamily: 'Inter, sans-serif', ...T.normal }}>
                         Spreadsheets &amp; broken ERP
                     </h3>
-
-                    {/* Fake spreadsheet rows */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', opacity: 0.6 }}>
                         {Array.from({ length: 9 }).map((_, i) => (
                             <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -294,23 +341,20 @@ export default function UpworkAssetsStudio() {
                             </div>
                         ))}
                     </div>
-                    <p style={{ fontSize: '18px', color: '#6B7280', marginTop: '32px', ...T.mono }}>??? errors  ·  no audit trail</p>
+                    <p style={{ fontSize: '18px', color: '#6B7280', marginTop: '32px', border: 'none', ...T.mono }}>??? errors  ·  no audit trail</p>
                 </div>
 
                 {/* AFTER */}
                 <div style={{ backgroundColor: 'rgba(0,210,255,0.04)', border: '1px solid rgba(0,210,255,0.3)', borderRadius: '24px', padding: '56px', position: 'relative', overflow: 'hidden' }}>
                     <div style={{ position: 'absolute', top: 0, right: '32px', transform: 'translateY(-50%)', backgroundColor: '#00D2FF', color: '#010409', padding: '12px 32px', borderRadius: '9999px', fontWeight: 900, textTransform: 'uppercase', fontSize: '18px', zIndex: 10, boxShadow: '0 0 20px rgba(0,210,255,0.4)', ...T.wide }}>After</div>
-
-                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#00D2FF', marginBottom: '40px', marginTop: '16px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>
+                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#00D2FF', marginBottom: '40px', marginTop: '16px', fontFamily: 'Inter, sans-serif', ...T.normal }}>
                         Stable Manager.io accounting core
                     </h3>
-
-                    {/* Result cards */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                         {[
-                            { icon: '📈', label: 'P&L Statement', status: 'Synced', color: '#22c55e' },
-                            { icon: '🏦', label: 'Balance Sheet', status: 'Audit-Ready', color: '#00D2FF' },
-                            { icon: '💸', label: 'Cash Flow', status: 'Accurate', color: '#FFD700' },
+                            { icon: '📈', label: 'P&L Statement', status: 'Synced',      color: '#22c55e' },
+                            { icon: '🏦', label: 'Balance Sheet',  status: 'Audit-Ready', color: '#00D2FF' },
+                            { icon: '💸', label: 'Cash Flow',      status: 'Accurate',    color: '#FFD700' },
                         ].map(r => (
                             <div key={r.label} style={{ backgroundColor: '#050a10', border: '1px solid rgba(0,210,255,0.2)', borderRadius: '16px', padding: '28px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 0 16px rgba(0,210,255,0.06)' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
@@ -321,8 +365,7 @@ export default function UpworkAssetsStudio() {
                             </div>
                         ))}
                     </div>
-
-                    <p style={{ fontSize: '18px', color: 'rgba(0,210,255,0.6)', marginTop: '32px', ...T.mono }}>0 errors  ·  full reconciliation</p>
+                    <p style={{ fontSize: '18px', color: 'rgba(0,210,255,0.6)', marginTop: '32px', border: 'none', ...T.mono }}>0 errors  ·  full reconciliation</p>
                 </div>
             </div>
         </div>
@@ -330,42 +373,33 @@ export default function UpworkAssetsStudio() {
 
     const renderProcess = () => (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', justifyContent: 'space-between' }}>
-            {/* Header */}
             <div style={{ textAlign: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '32px', opacity: 0.8 }}>
                     <RefinedIcon size={52} />
-                    <div className="flex items-baseline">
-                        <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>inspiron</span>
-                        <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>TECH</span>
+                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                        <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Inter, sans-serif', ...T.normal }}>inspiron</span>
+                        <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Inter, sans-serif', ...T.normal }}>TECH</span>
                     </div>
                 </div>
                 <div style={{ color: '#9CA3AF', fontWeight: 700, textTransform: 'uppercase', marginBottom: '24px', fontSize: '18px', ...T.xwide }}>DELIVERY PROTOCOL</div>
-                <h1 style={{ fontSize: '72px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, borderBottom: '2px solid #00D2FF', paddingBottom: '16px', display: 'inline-block', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.tight }}>
+                <h1 style={{ fontSize: '72px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, borderBottom: '2px solid #00D2FF', paddingBottom: '16px', display: 'inline-block', fontFamily: 'Inter, sans-serif', ...T.tight }}>
                     Your Setup in 4 Clear Steps
                 </h1>
             </div>
 
-            {/* 4-Step Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px', width: '100%', flex: 1, alignItems: 'center', paddingTop: '48px', paddingBottom: '32px' }}>
                 {PROCESS_STEPS.map(s => (
                     <div key={s.num} style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '24px', padding: '48px', textAlign: 'center', position: 'relative' }}>
-                        {/* Step Number Circle */}
                         <div style={{ width: '80px', height: '80px', borderRadius: '50%', border: `2px solid ${s.color}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px', fontWeight: 900, position: 'absolute', top: '-40px', left: '50%', transform: 'translateX(-50%)', color: s.color, backgroundColor: `${s.color}15`, ...T.normal }}>
                             {s.num}
                         </div>
-                        {/* Emoji */}
                         <div style={{ fontSize: '70px', marginTop: '24px', marginBottom: '24px' }}>{s.emoji}</div>
-                        {/* Title */}
-                        <h3 style={{ fontSize: '30px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '12px', color: s.color, ...T.wide }}>
-                            {s.title}
-                        </h3>
-                        {/* Sub */}
+                        <h3 style={{ fontSize: '30px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '12px', color: s.color, ...T.wide }}>{s.title}</h3>
                         <p style={{ fontSize: '20px', color: '#9CA3AF', ...T.normal }}>{s.sub}</p>
                     </div>
                 ))}
             </div>
 
-            {/* Bottom Badge */}
             <div style={{ backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '24px 56px', fontSize: '20px', color: '#FFFFFF', ...T.mono }}>
                 Zero-Loss Protocol  ·  0.1% Error Tolerance  ·  Every Stage Verified
             </div>
@@ -374,20 +408,18 @@ export default function UpworkAssetsStudio() {
 
     const renderPricing = () => (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', paddingTop: '32px' }}>
-            {/* Header */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px', opacity: 0.8 }}>
                 <RefinedIcon size={52} />
-                <div className="flex items-baseline">
-                    <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.normal }}>TECH</span>
+                <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Inter, sans-serif', ...T.normal }}>inspiron</span>
+                    <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Inter, sans-serif', ...T.normal }}>TECH</span>
                 </div>
             </div>
-            <h1 style={{ fontSize: '68px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, marginBottom: '8px', fontFamily: 'Neo Sans Pro, Inter, sans-serif', ...T.tight }}>
+            <h1 style={{ fontSize: '68px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, marginBottom: '8px', fontFamily: 'Inter, sans-serif', ...T.tight }}>
                 Choose Your <span style={{ color: '#00D2FF' }}>ERP Package</span>
             </h1>
-            <p style={{ fontSize: '24px', color: '#9CA3AF', marginBottom: '56px', ...T.normal }}>{uwData.subtext}</p>
+            <p style={{ fontSize: '24px', color: '#9CA3AF', marginBottom: '56px', border: 'none', padding: 0, ...T.normal }}>{uwData.subtext}</p>
 
-            {/* 3-Tier Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', width: '100%', alignItems: 'stretch', flex: 1, maxHeight: '750px' }}>
                 {PRICING_TIERS.map(tier => (
                     <div
@@ -405,15 +437,13 @@ export default function UpworkAssetsStudio() {
                         }}
                     >
                         {tier.featured && (
-                            <div style={{ position: 'absolute', top: '-20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#00D2FF', color: '#010409', padding: '10px 32px', borderRadius: '9999px', fontWeight: 900, textTransform: 'uppercase', fontSize: '14px', ...T.wide }}>
+                            <div style={{ position: 'absolute', top: '-20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#00D2FF', color: '#010409', padding: '10px 32px', borderRadius: '9999px', fontWeight: 900, textTransform: 'uppercase', fontSize: '14px', whiteSpace: 'nowrap', ...T.wide }}>
                                 Most Popular
                             </div>
                         )}
-
                         <h3 style={{ fontSize: '36px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '32px', color: tier.featured ? '#00D2FF' : '#FFFFFF', ...T.wide }}>
                             {tier.name}
                         </h3>
-
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: 1 }}>
                             {tier.items.map(item => (
                                 <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
@@ -426,19 +456,18 @@ export default function UpworkAssetsStudio() {
                 ))}
             </div>
 
-            {/* Footer */}
             <div style={{ marginTop: 'auto', paddingTop: '32px', textAlign: 'center' }}>
-                <p style={{ fontSize: '18px', color: '#9CA3AF', ...T.mono }}>{uwData.website}  ·  {uwData.name}  ·  {uwData.role}</p>
+                <p style={{ fontSize: '18px', color: '#9CA3AF', border: 'none', ...T.mono }}>{uwData.website}  ·  {uwData.name}  ·  {uwData.role}</p>
             </div>
         </div>
     );
 
     /* ─── MODE BUTTONS ────────────────────────────────────────────────────── */
     const modes: { id: ActiveMode; label: string }[] = [
-        { id: 'uw-hero', label: 'Hero' },
+        { id: 'uw-hero',         label: 'Hero' },
         { id: 'uw-before-after', label: 'Before / After' },
-        { id: 'uw-process', label: 'Process' },
-        { id: 'uw-pricing', label: 'Pricing' },
+        { id: 'uw-process',      label: 'Process' },
+        { id: 'uw-pricing',      label: 'Pricing' },
     ];
 
     /* ═══════════════════════════════════════════════════════════════════════
@@ -458,7 +487,7 @@ export default function UpworkAssetsStudio() {
                     <Link href="/pitch-deck/upwork-portfolio" className="text-gray-500 hover:text-white text-[10px] font-mono tracking-widest transition-colors hidden sm:block">Pitch Deck →</Link>
                 </div>
                 <div className="text-[10px] text-gray-600 font-mono tracking-widest hidden lg:block">
-                    UPWORK PORTFOLIO STUDIO // V2.1 // ACTIVE
+                    UPWORK PORTFOLIO STUDIO // V2.2 // ACTIVE
                 </div>
                 <div className="flex gap-1.5">
                     {modes.map(m => (
@@ -505,8 +534,8 @@ export default function UpworkAssetsStudio() {
 
                     {/* Form Fields */}
                     <div className="space-y-5 flex-1">
-                        <SidebarInput label="Tag / Eyebrow" value={uwData.tag} onChange={v => setUwData(p => ({ ...p, tag: v }))} />
-                        <SidebarInput label="Headline" value={uwData.headline} onChange={v => setUwData(p => ({ ...p, headline: v }))} />
+                        <SidebarInput label="Tag / Eyebrow" value={uwData.tag}      onChange={v => setUwData(p => ({ ...p, tag: v }))} />
+                        <SidebarInput label="Headline"      value={uwData.headline} onChange={v => setUwData(p => ({ ...p, headline: v }))} />
                         <div>
                             <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 mb-2">Highlight (Gold)</label>
                             <input
@@ -525,19 +554,18 @@ export default function UpworkAssetsStudio() {
                                 rows={3}
                             />
                         </div>
-
                         <div className="border-t border-white/5 pt-5">
-                            <SidebarInput label="Name" value={uwData.name} onChange={v => setUwData(p => ({ ...p, name: v }))} />
+                            <SidebarInput label="Name"    value={uwData.name}    onChange={v => setUwData(p => ({ ...p, name: v }))} />
                         </div>
-                        <SidebarInput label="Role" value={uwData.role} onChange={v => setUwData(p => ({ ...p, role: v }))} />
+                        <SidebarInput label="Role"    value={uwData.role}    onChange={v => setUwData(p => ({ ...p, role: v }))} />
                         <SidebarInput label="Website" value={uwData.website} onChange={v => setUwData(p => ({ ...p, website: v }))} />
                     </div>
 
                     {/* System Note */}
                     <div className="mt-6 bg-[#14a800]/10 border border-[#14a800]/30 rounded-lg px-4 py-3 text-[11px] text-[#14a800] font-mono">
-                        &gt;&gt; EXPORT: JPG 0.95q — dom-to-image-more (SVG engine)
-                        <br />
-                        &gt;&gt; CANVAS: 1600×1200px · 4:3 · Blur orbs hidden on export
+                        &gt;&gt; EXPORT: JPG 0.95q — dom-to-image-more (SVG engine)<br />
+                        &gt;&gt; CANVAS: 1600×1200px · 4:3 · Blur orbs hidden on export<br />
+                        &gt;&gt; V2.2: Hero layout fix — font sizes, nowrap, no border artifact
                     </div>
 
                     {/* Pro tip */}
@@ -570,7 +598,6 @@ export default function UpworkAssetsStudio() {
                         backgroundSize: '24px 24px',
                     }}
                 >
-                    {/* Scale indicator */}
                     <div className="absolute top-4 right-4 text-[10px] font-mono text-gray-600 z-10">
                         {(scale * 100).toFixed(0)}% · 1600×1200
                     </div>
@@ -582,13 +609,11 @@ export default function UpworkAssetsStudio() {
                             style={{ width: '1600px', height: '1200px', backgroundColor: '#010409', padding: '64px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', border: '1px solid rgba(255,255,255,0.05)' }}
                         >
                             {/* Grid Overlay */}
-                            <div
-                                style={{
-                                    position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
-                                    backgroundImage: 'linear-gradient(to right, rgba(0,210,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,210,255,0.03) 1px, transparent 1px)',
-                                    backgroundSize: '40px 40px',
-                                }}
-                            />
+                            <div style={{
+                                position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
+                                backgroundImage: 'linear-gradient(to right, rgba(0,210,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,210,255,0.03) 1px, transparent 1px)',
+                                backgroundSize: '40px 40px',
+                            }} />
 
                             {/* Blur Orbs (hidden on export) */}
                             <div data-blur-orb style={{ position: 'absolute', top: '-300px', right: '-300px', width: '900px', height: '900px', backgroundColor: '#00D2FF', borderRadius: '50%', opacity: 0.07, pointerEvents: 'none', zIndex: 0, filter: 'blur(200px)' }} />
@@ -609,10 +634,10 @@ export default function UpworkAssetsStudio() {
 
                             {/* ─── DYNAMIC CONTENT ─── */}
                             <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                                {activeMode === 'uw-hero' && renderHero()}
+                                {activeMode === 'uw-hero'         && renderHero()}
                                 {activeMode === 'uw-before-after' && renderBeforeAfter()}
-                                {activeMode === 'uw-process' && renderProcess()}
-                                {activeMode === 'uw-pricing' && renderPricing()}
+                                {activeMode === 'uw-process'      && renderProcess()}
+                                {activeMode === 'uw-pricing'      && renderPricing()}
                             </div>
                         </div>
                     </div>
