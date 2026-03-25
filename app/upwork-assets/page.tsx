@@ -145,20 +145,24 @@ export default function UpworkAssetsStudio() {
                 backgroundColor: '#010409',
                 width: 1600,
                 height: 1200,
-                windowWidth: 1600,   // CRITICAL: prevents reflow into narrow viewport
+                windowWidth: 1600,
                 windowHeight: 1200,
                 logging: false,
-                onclone: (_clonedDoc, clonedEl) => {
-                    // html2canvas measures custom @font-face space glyphs as 0px wide.
-                    // Replacing U+0020 with U+00A0 (NBSP) forces a measurable glyph.
+                onclone: (clonedDoc: Document) => {
+                    // html2canvas v1.4.1: onclone receives ONE argument (the cloned document).
+                    // We must querySelector the canvas root ourselves, then walk all text nodes
+                    // replacing U+0020 (space) with U+00A0 (NBSP) — which always has a
+                    // measurable glyph width even with custom @font-face fonts.
+                    const root = clonedDoc.getElementById('data-export-canvas');
+                    if (!root) return;
                     const walk = (node: Node) => {
-                        if (node.nodeType === Node.TEXT_NODE) {
-                            node.textContent = node.textContent?.replace(/ /g, '\u00A0') ?? null;
+                        if (node.nodeType === Node.TEXT_NODE && node.textContent) {
+                            node.textContent = node.textContent.replace(/ /g, '\u00A0');
                         } else {
                             node.childNodes.forEach(walk);
                         }
                     };
-                    walk(clonedEl);
+                    walk(root);
                 },
             });
             const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
