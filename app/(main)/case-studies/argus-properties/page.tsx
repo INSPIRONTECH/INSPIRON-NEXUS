@@ -494,21 +494,17 @@ export default function ArgusPropertiesCaseStudy() {
             const orbs = el.querySelectorAll<HTMLElement>("[data-blur-orb]");
             orbs.forEach(o => (o.style.display = "none"));
 
-            let dataUrl: string | null = null;
-            try {
-                const dti = await import("dom-to-image-more");
-                dataUrl = await dti.default.toPng(el, {
-                    width: 670, height: 660,
-                    style: { transform: "none" },
-                });
-            } catch {
-                const { default: html2canvas } = await import("html2canvas");
-                const canvas = await html2canvas(el, {
-                    scale: 1, useCORS: true, backgroundColor: NAVY,
-                    width: 670, height: 660,
-                });
-                dataUrl = canvas.toDataURL("image/png");
-            }
+            const { default: html2canvas } = await import("html2canvas");
+            const canvas = await html2canvas(el, {
+                scale: window.devicePixelRatio || 2, // High DPI capture
+                useCORS: true, 
+                backgroundColor: NAVY,
+                width: 670, 
+                height: 660,
+                logging: false
+            });
+            
+            const dataUrl = canvas.toDataURL("image/png", 1.0);
 
             orbs.forEach(o => (o.style.display = ""));
 
