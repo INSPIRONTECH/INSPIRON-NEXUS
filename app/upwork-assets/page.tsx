@@ -200,8 +200,8 @@ export default function UpworkAssetsStudio() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '40px' }}>
                 <RefinedIcon size={64} />
                 <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <span style={{ fontSize: '28px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Inter, sans-serif', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '26px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '6px', fontFamily: 'Inter, sans-serif', ...T.normal }}>TECH</span>
+                    <span style={{ fontSize: '28px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', ...T.normal }}>inspiron</span>
+                    <span style={{ fontSize: '26px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '6px', ...T.normal }}>TECH</span>
                 </div>
             </div>
 
@@ -229,7 +229,6 @@ export default function UpworkAssetsStudio() {
                 color: '#FFFFFF',
                 lineHeight: 1.05,
                 marginBottom: '32px',
-                fontFamily: 'Inter, sans-serif',
                 whiteSpace: 'nowrap',
                 ...T.tight,
             }}>
@@ -243,7 +242,6 @@ export default function UpworkAssetsStudio() {
                 color: '#FFD700',
                 lineHeight: 1.2,
                 marginBottom: '48px',
-                fontFamily: 'Inter, sans-serif',
                 fontStyle: 'italic',
                 whiteSpace: 'nowrap',
                 border: 'none',
@@ -302,8 +300,8 @@ export default function UpworkAssetsStudio() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px', opacity: 0.6 }}>
                 <RefinedIcon size={36} />
                 <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <span style={{ fontSize: '18px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Inter, sans-serif', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '16px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Inter, sans-serif', ...T.normal }}>TECH</span>
+                    <span style={{ fontSize: '18px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', ...T.normal }}>inspiron</span>
+                    <span style={{ fontSize: '16px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', ...T.normal }}>TECH</span>
                 </div>
             </div>
 
@@ -311,7 +309,7 @@ export default function UpworkAssetsStudio() {
                 {/* BEFORE */}
                 <div style={{ backgroundColor: 'rgba(10,5,5,0.8)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '24px', padding: '56px', position: 'relative', overflow: 'hidden' }}>
                     <div style={{ position: 'absolute', top: 0, right: '32px', transform: 'translateY(-50%)', backgroundColor: 'rgba(127,29,29,0.9)', color: '#FFFFFF', padding: '12px 32px', borderRadius: '9999px', fontWeight: 700, textTransform: 'uppercase', border: '1px solid rgba(239,68,68,0.5)', fontSize: '18px', zIndex: 10, ...T.wide }}>Before</div>
-                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#f87171', marginBottom: '32px', marginTop: '16px', fontFamily: 'Inter, sans-serif', ...T.normal }}>
+                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#f87171', marginBottom: '32px', marginTop: '16px', ...T.normal }}>
                         Spreadsheets &amp; broken ERP
                     </h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', opacity: 0.6 }}>
@@ -330,7 +328,7 @@ export default function UpworkAssetsStudio() {
                 {/* AFTER */}
                 <div style={{ backgroundColor: 'rgba(0,210,255,0.04)', border: '1px solid rgba(0,210,255,0.3)', borderRadius: '24px', padding: '56px', position: 'relative', overflow: 'hidden' }}>
                     <div style={{ position: 'absolute', top: 0, right: '32px', transform: 'translateY(-50%)', backgroundColor: '#00D2FF', color: '#010409', padding: '12px 32px', borderRadius: '9999px', fontWeight: 900, textTransform: 'uppercase', fontSize: '18px', zIndex: 10, boxShadow: '0 0 20px rgba(0,210,255,0.4)', ...T.wide }}>After</div>
-                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#00D2FF', marginBottom: '40px', marginTop: '16px', fontFamily: 'Inter, sans-serif', ...T.normal }}>
+                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#00D2FF', marginBottom: '40px', marginTop: '16px', ...T.normal }}>
                         Stable Manager.io accounting core
                     </h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -360,12 +358,12 @@ export default function UpworkAssetsStudio() {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '32px', opacity: 0.8 }}>
                     <RefinedIcon size={52} />
                     <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                        <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Inter, sans-serif', ...T.normal }}>inspiron</span>
-                        <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Inter, sans-serif', ...T.normal }}>TECH</span>
+                        <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', ...T.normal }}>inspiron</span>
+                        <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', ...T.normal }}>TECH</span>
                     </div>
                 </div>
                 <div style={{ color: '#9CA3AF', fontWeight: 700, textTransform: 'uppercase', marginBottom: '24px', fontSize: '18px', ...T.xwide }}>DELIVERY PROTOCOL</div>
-                <h1 style={{ fontSize: '72px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, borderBottom: '2px solid #00D2FF', paddingBottom: '16px', display: 'inline-block', fontFamily: 'Inter, sans-serif', ...T.tight }}>
+                <h1 style={{ fontSize: '72px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, borderBottom: '2px solid #00D2FF', paddingBottom: '16px', display: 'inline-block', ...T.tight }}>
                     Your Setup in 4 Clear Steps
                 </h1>
             </div>
@@ -394,11 +392,11 @@ export default function UpworkAssetsStudio() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px', opacity: 0.8 }}>
                 <RefinedIcon size={52} />
                 <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', fontFamily: 'Inter, sans-serif', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', fontFamily: 'Inter, sans-serif', ...T.normal }}>TECH</span>
+                    <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', ...T.normal }}>inspiron</span>
+                    <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', ...T.normal }}>TECH</span>
                 </div>
             </div>
-            <h1 style={{ fontSize: '68px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, marginBottom: '8px', fontFamily: 'Inter, sans-serif', ...T.tight }}>
+            <h1 style={{ fontSize: '68px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, marginBottom: '8px', ...T.tight }}>
                 Choose Your <span style={{ color: '#00D2FF' }}>ERP Package</span>
             </h1>
             <p style={{ fontSize: '24px', color: '#9CA3AF', marginBottom: '56px', border: 'none', padding: 0, ...T.normal }}>{uwData.subtext}</p>
