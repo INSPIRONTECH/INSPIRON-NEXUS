@@ -18,19 +18,7 @@ interface UpworkData {
     website: string;
 }
 
-/* ─── html2canvas TEXT FIX ────────────────────────────────────────────────
-   html2canvas collapses word-spacing with custom @font-face fonts.
-   EVERY text element inside the export canvas must use explicit
-   word-spacing and letter-spacing via inline style — NOT Tailwind
-   tracking-* classes. This object provides safe defaults.
-   ──────────────────────────────────────────────────────────────────────── */
-const T = {
-    normal: { wordSpacing: '0.15em', letterSpacing: '0px' } as React.CSSProperties,
-    tight:  { wordSpacing: '0.12em', letterSpacing: '-0.01em' } as React.CSSProperties,
-    wide:   { wordSpacing: '0.25em', letterSpacing: '0.2em' } as React.CSSProperties,
-    xwide:  { wordSpacing: '0.3em',  letterSpacing: '0.3em' } as React.CSSProperties,
-    mono:   { wordSpacing: '0.2em',  letterSpacing: '0.05em', fontFamily: 'monospace' } as React.CSSProperties,
-};
+
 
 /* ─── PRESETS ────────────────────────────────────────────────────────────── */
 const PRESETS: Record<string, Partial<UpworkData>> = {
@@ -200,8 +188,8 @@ export default function UpworkAssetsStudio() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '40px' }}>
                 <RefinedIcon size={64} />
                 <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <span style={{ fontSize: '28px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '26px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '6px', ...T.normal }}>TECH</span>
+                    <span style={{ fontSize: '28px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF' }}>inspiron</span>
+                    <span style={{ fontSize: '26px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '6px' }}>TECH</span>
                 </div>
             </div>
 
@@ -217,7 +205,6 @@ export default function UpworkAssetsStudio() {
                 marginBottom: '48px',
                 fontSize: '18px',
                 whiteSpace: 'nowrap',
-                ...T.xwide,
             }}>
                 {uwData.tag}
             </div>
@@ -230,7 +217,6 @@ export default function UpworkAssetsStudio() {
                 lineHeight: 1.05,
                 marginBottom: '32px',
                 whiteSpace: 'nowrap',
-                ...T.tight,
             }}>
                 {uwData.headline}
             </h1>
@@ -247,7 +233,6 @@ export default function UpworkAssetsStudio() {
                 border: 'none',
                 background: 'none',
                 padding: 0,
-                ...T.normal,
             }}>
                 {uwData.highlight}
             </h2>
@@ -262,7 +247,6 @@ export default function UpworkAssetsStudio() {
                 border: 'none',
                 background: 'none',
                 padding: 0,
-                ...T.normal,
             }}>
                 {uwData.subtext}
             </p>
@@ -287,8 +271,8 @@ export default function UpworkAssetsStudio() {
                         minWidth: '260px',
                     }}>
                         <span style={{ fontSize: '34px' }}>{c.icon}</span>
-                        <span style={{ fontSize: '22px', color: '#00D2FF', fontWeight: 600, ...T.normal }}>{c.label}</span>
-                        <span style={{ fontSize: '13px', color: '#6B7280', ...T.mono }}>{c.sub}</span>
+                        <span style={{ fontSize: '22px', color: '#00D2FF', fontWeight: 600 }}>{c.label}</span>
+                        <span style={{ fontSize: '13px', color: '#6B7280' }}>{c.sub}</span>
                     </div>
                 ))}
             </div>
@@ -300,16 +284,16 @@ export default function UpworkAssetsStudio() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px', opacity: 0.6 }}>
                 <RefinedIcon size={36} />
                 <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <span style={{ fontSize: '18px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '16px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', ...T.normal }}>TECH</span>
+                    <span style={{ fontSize: '18px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF' }}>inspiron</span>
+                    <span style={{ fontSize: '16px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px' }}>TECH</span>
                 </div>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', flex: 1, alignContent: 'center', alignItems: 'stretch' }}>
                 {/* BEFORE */}
                 <div style={{ backgroundColor: 'rgba(10,5,5,0.8)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '24px', padding: '56px', position: 'relative', overflow: 'hidden' }}>
-                    <div style={{ position: 'absolute', top: 0, right: '32px', transform: 'translateY(-50%)', backgroundColor: 'rgba(127,29,29,0.9)', color: '#FFFFFF', padding: '12px 32px', borderRadius: '9999px', fontWeight: 700, textTransform: 'uppercase', border: '1px solid rgba(239,68,68,0.5)', fontSize: '18px', zIndex: 10, ...T.wide }}>Before</div>
-                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#f87171', marginBottom: '32px', marginTop: '16px', ...T.normal }}>
+                    <div style={{ position: 'absolute', top: 0, right: '32px', transform: 'translateY(-50%)', backgroundColor: 'rgba(127,29,29,0.9)', color: '#FFFFFF', padding: '12px 32px', borderRadius: '9999px', fontWeight: 700, textTransform: 'uppercase', border: '1px solid rgba(239,68,68,0.5)', fontSize: '18px', zIndex: 10 }}>Before</div>
+                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#f87171', marginBottom: '32px', marginTop: '16px' }}>
                         Spreadsheets &amp; broken ERP
                     </h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', opacity: 0.6 }}>
@@ -322,13 +306,13 @@ export default function UpworkAssetsStudio() {
                             </div>
                         ))}
                     </div>
-                    <p style={{ fontSize: '18px', color: '#6B7280', marginTop: '32px', border: 'none', ...T.mono }}>??? errors  ·  no audit trail</p>
+                    <p style={{ fontSize: '18px', color: '#6B7280', marginTop: '32px', border: 'none' }}>??? errors  ·  no audit trail</p>
                 </div>
 
                 {/* AFTER */}
                 <div style={{ backgroundColor: 'rgba(0,210,255,0.04)', border: '1px solid rgba(0,210,255,0.3)', borderRadius: '24px', padding: '56px', position: 'relative', overflow: 'hidden' }}>
-                    <div style={{ position: 'absolute', top: 0, right: '32px', transform: 'translateY(-50%)', backgroundColor: '#00D2FF', color: '#010409', padding: '12px 32px', borderRadius: '9999px', fontWeight: 900, textTransform: 'uppercase', fontSize: '18px', zIndex: 10, boxShadow: '0 0 20px rgba(0,210,255,0.4)', ...T.wide }}>After</div>
-                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#00D2FF', marginBottom: '40px', marginTop: '16px', ...T.normal }}>
+                    <div style={{ position: 'absolute', top: 0, right: '32px', transform: 'translateY(-50%)', backgroundColor: '#00D2FF', color: '#010409', padding: '12px 32px', borderRadius: '9999px', fontWeight: 900, textTransform: 'uppercase', fontSize: '18px', zIndex: 10, boxShadow: '0 0 20px rgba(0,210,255,0.4)' }}>After</div>
+                    <h3 style={{ fontSize: '36px', fontWeight: 300, color: '#00D2FF', marginBottom: '40px', marginTop: '16px' }}>
                         Stable Manager.io accounting core
                     </h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -340,13 +324,13 @@ export default function UpworkAssetsStudio() {
                             <div key={r.label} style={{ backgroundColor: '#050a10', border: '1px solid rgba(0,210,255,0.2)', borderRadius: '16px', padding: '28px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 0 16px rgba(0,210,255,0.06)' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                                     <span style={{ fontSize: '36px' }}>{r.icon}</span>
-                                    <span style={{ fontSize: '24px', color: '#FFFFFF', fontWeight: 500, ...T.normal }}>{r.label}</span>
+                                    <span style={{ fontSize: '24px', color: '#FFFFFF', fontWeight: 500 }}>{r.label}</span>
                                 </div>
-                                <span style={{ padding: '8px 24px', borderRadius: '9999px', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', backgroundColor: `${r.color}20`, color: r.color, border: `1px solid ${r.color}40`, ...T.wide }}>{r.status}</span>
+                                <span style={{ padding: '8px 24px', borderRadius: '9999px', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', backgroundColor: `${r.color}20`, color: r.color, border: `1px solid ${r.color}40` }}>{r.status}</span>
                             </div>
                         ))}
                     </div>
-                    <p style={{ fontSize: '18px', color: 'rgba(0,210,255,0.6)', marginTop: '32px', border: 'none', ...T.mono }}>0 errors  ·  full reconciliation</p>
+                    <p style={{ fontSize: '18px', color: 'rgba(0,210,255,0.6)', marginTop: '32px', border: 'none' }}>0 errors  ·  full reconciliation</p>
                 </div>
             </div>
         </div>
@@ -358,12 +342,12 @@ export default function UpworkAssetsStudio() {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '32px', opacity: 0.8 }}>
                     <RefinedIcon size={52} />
                     <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                        <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', ...T.normal }}>inspiron</span>
-                        <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', ...T.normal }}>TECH</span>
+                        <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF' }}>inspiron</span>
+                        <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px' }}>TECH</span>
                     </div>
                 </div>
-                <div style={{ color: '#9CA3AF', fontWeight: 700, textTransform: 'uppercase', marginBottom: '24px', fontSize: '18px', ...T.xwide }}>DELIVERY PROTOCOL</div>
-                <h1 style={{ fontSize: '72px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, borderBottom: '2px solid #00D2FF', paddingBottom: '16px', display: 'inline-block', ...T.tight }}>
+                <div style={{ color: '#9CA3AF', fontWeight: 700, textTransform: 'uppercase', marginBottom: '24px', fontSize: '18px' }}>DELIVERY PROTOCOL</div>
+                <h1 style={{ fontSize: '72px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, borderBottom: '2px solid #00D2FF', paddingBottom: '16px', display: 'inline-block' }}>
                     Your Setup in 4 Clear Steps
                 </h1>
             </div>
@@ -371,17 +355,17 @@ export default function UpworkAssetsStudio() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px', width: '100%', flex: 1, alignItems: 'center', paddingTop: '48px', paddingBottom: '32px' }}>
                 {PROCESS_STEPS.map(s => (
                     <div key={s.num} style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '24px', padding: '48px', textAlign: 'center', position: 'relative' }}>
-                        <div style={{ width: '80px', height: '80px', borderRadius: '50%', border: `2px solid ${s.color}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px', fontWeight: 900, position: 'absolute', top: '-40px', left: '50%', transform: 'translateX(-50%)', color: s.color, backgroundColor: `${s.color}15`, ...T.normal }}>
+                        <div style={{ width: '80px', height: '80px', borderRadius: '50%', border: `2px solid ${s.color}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px', fontWeight: 900, position: 'absolute', top: '-40px', left: '50%', transform: 'translateX(-50%)', color: s.color, backgroundColor: `${s.color}15` }}>
                             {s.num}
                         </div>
                         <div style={{ fontSize: '70px', marginTop: '24px', marginBottom: '24px' }}>{s.emoji}</div>
-                        <h3 style={{ fontSize: '30px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '12px', color: s.color, ...T.wide }}>{s.title}</h3>
-                        <p style={{ fontSize: '20px', color: '#9CA3AF', ...T.normal }}>{s.sub}</p>
+                        <h3 style={{ fontSize: '30px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '12px', color: s.color }}>{s.title}</h3>
+                        <p style={{ fontSize: '20px', color: '#9CA3AF' }}>{s.sub}</p>
                     </div>
                 ))}
             </div>
 
-            <div style={{ backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '24px 56px', fontSize: '20px', color: '#FFFFFF', ...T.mono }}>
+            <div style={{ backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '24px 56px', fontSize: '20px', color: '#FFFFFF' }}>
                 Zero-Loss Protocol  ·  0.1% Error Tolerance  ·  Every Stage Verified
             </div>
         </div>
@@ -392,14 +376,14 @@ export default function UpworkAssetsStudio() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px', opacity: 0.8 }}>
                 <RefinedIcon size={52} />
                 <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF', ...T.normal }}>inspiron</span>
-                    <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px', ...T.normal }}>TECH</span>
+                    <span style={{ fontSize: '22px', fontWeight: 500, textTransform: 'lowercase', color: '#FFFFFF' }}>inspiron</span>
+                    <span style={{ fontSize: '20px', fontWeight: 300, textTransform: 'uppercase', color: '#FFD700', marginLeft: '4px' }}>TECH</span>
                 </div>
             </div>
-            <h1 style={{ fontSize: '68px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, marginBottom: '8px', ...T.tight }}>
+            <h1 style={{ fontSize: '68px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1, marginBottom: '8px' }}>
                 Choose Your <span style={{ color: '#00D2FF' }}>ERP Package</span>
             </h1>
-            <p style={{ fontSize: '24px', color: '#9CA3AF', marginBottom: '56px', border: 'none', padding: 0, ...T.normal }}>{uwData.subtext}</p>
+            <p style={{ fontSize: '24px', color: '#9CA3AF', marginBottom: '56px', border: 'none', padding: 0 }}>{uwData.subtext}</p>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', width: '100%', alignItems: 'stretch', flex: 1, maxHeight: '750px' }}>
                 {PRICING_TIERS.map(tier => (
@@ -418,18 +402,18 @@ export default function UpworkAssetsStudio() {
                         }}
                     >
                         {tier.featured && (
-                            <div style={{ position: 'absolute', top: '-20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#00D2FF', color: '#010409', padding: '10px 32px', borderRadius: '9999px', fontWeight: 900, textTransform: 'uppercase', fontSize: '14px', whiteSpace: 'nowrap', ...T.wide }}>
+                            <div style={{ position: 'absolute', top: '-20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#00D2FF', color: '#010409', padding: '10px 32px', borderRadius: '9999px', fontWeight: 900, textTransform: 'uppercase', fontSize: '14px', whiteSpace: 'nowrap' }}>
                                 Most Popular
                             </div>
                         )}
-                        <h3 style={{ fontSize: '36px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '32px', color: tier.featured ? '#00D2FF' : '#FFFFFF', ...T.wide }}>
+                        <h3 style={{ fontSize: '36px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '32px', color: tier.featured ? '#00D2FF' : '#FFFFFF' }}>
                             {tier.name}
                         </h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: 1 }}>
                             {tier.items.map(item => (
                                 <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
                                     <span style={{ color: '#FFD700', fontSize: '24px', marginTop: '2px' }}>✓</span>
-                                    <span style={{ fontSize: '20px', color: '#D1D5DB', ...T.normal }}>{item}</span>
+                                    <span style={{ fontSize: '20px', color: '#D1D5DB' }}>{item}</span>
                                 </div>
                             ))}
                         </div>
@@ -438,7 +422,7 @@ export default function UpworkAssetsStudio() {
             </div>
 
             <div style={{ marginTop: 'auto', paddingTop: '32px', textAlign: 'center' }}>
-                <p style={{ fontSize: '18px', color: '#9CA3AF', border: 'none', ...T.mono }}>{uwData.website}  ·  {uwData.name}  ·  {uwData.role}</p>
+                <p style={{ fontSize: '18px', color: '#9CA3AF', border: 'none' }}>{uwData.website}  ·  {uwData.name}  ·  {uwData.role}</p>
             </div>
         </div>
     );
@@ -587,6 +571,7 @@ export default function UpworkAssetsStudio() {
                         {/* ═══ THE EXPORT CANVAS ═══ */}
                         <div
                             id="data-export-canvas"
+                            className="font-institutional"
                             style={{ width: '1600px', height: '1200px', backgroundColor: '#010409', padding: '64px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', border: '1px solid rgba(255,255,255,0.05)' }}
                         >
                             {/* Grid Overlay */}
@@ -606,7 +591,7 @@ export default function UpworkAssetsStudio() {
                             </div>
 
                             {/* Website Watermark */}
-                            <div style={{ position: 'absolute', bottom: '56px', left: '64px', zIndex: 50, color: '#9CA3AF', opacity: 0.4, fontSize: '18px', ...T.mono }}>
+                            <div style={{ position: 'absolute', bottom: '56px', left: '64px', zIndex: 50, color: '#9CA3AF', opacity: 0.4, fontSize: '18px' }}>
                                 {uwData.website}
                             </div>
 
