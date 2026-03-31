@@ -235,7 +235,7 @@ npm run lint         # Lint check
 
 ## CURRENT KNOWN STATE
 
-- Framework: Next.js 15.1 (App Router) — stable
+- Framework: Next.js 15.5.11 (App Router) — stable
 - Deployment: Live at https://inspiron.tech via Vercel
 - Mobile nav: `TerminalDatapad.tsx` is the canonical mobile drawer
 - `MobileCommandMenu.tsx` is deprecated (do not use)
