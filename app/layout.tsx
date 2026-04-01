@@ -12,6 +12,21 @@ export const metadata: Metadata = {
         type: "website",
         locale: "en_BD",
         siteName: "INSPIRON TECH",
+        url: "https://www.inspiron.tech/",
+        images: [
+            {
+                url: "https://www.inspiron.tech/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "INSPIRON TECH | Official Manager.io Partner Bangladesh",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "INSPIRON TECH | Official Manager.io Partner Bangladesh",
+        description: "We architect workflow logic in Manager.io. 14+ years IT infrastructure, 10+ industries, NBR/VAT (Mushak 6.3), 20+ active clients, 100+ migrations.",
+        images: ["https://www.inspiron.tech/og-image.png"],
     },
 };
 
