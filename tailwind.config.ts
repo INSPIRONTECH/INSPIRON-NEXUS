@@ -12,6 +12,8 @@ const config: Config = {
       colors: {
         // Kinetic Palette - Sovereign Brand Manual v1.2.0
         "action-gold": "#FFD700",
+        "action-gold-light": "#FFF4CC",
+        "action-gold-dark": "#FFC700",
         "electric-cyan": "#00D2FF",
         "deep-navy-black": "#010409",
         "institutional-white": "#FFFFFF",

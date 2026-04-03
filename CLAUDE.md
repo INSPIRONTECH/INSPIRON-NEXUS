@@ -66,7 +66,7 @@ The broader operation structure:
 
 | Layer | Technology | Version | Notes |
 |---|---|---|---|
-| Framework | **Next.js** (App Router) | `^15.1.0` | NOT Pages Router |
+| Framework | **Next.js** (App Router) | `15.5.11` | NOT Pages Router |
 | UI Runtime | **React** | `^19.0.0` | |
 | Language | **TypeScript** | `^5` | Strict mode expected |
 | Styling | **Tailwind CSS** | `^3.4.1` | Token-based only |

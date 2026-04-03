@@ -72,14 +72,14 @@ export default function ClientFeedbackForm() {
 
     return (
         <>
-            <main className="min-h-screen bg-[#010409] text-white py-20 px-6">
+            <main className="min-h-screen bg-deep-navy-black text-white py-20 px-6">
                 <div className="max-w-3xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-12">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FFD700] to-[#FFF4CC] bg-clip-text text-transparent">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-action-gold to-action-gold-light bg-clip-text text-transparent">
                             Client Feedback & Service Request
                         </h1>
-                        <p className="text-lg text-gray-300">
+                        <p className="text-lg text-institutional-white/80">
                             Help us serve you better—share your experience and customization needs
                         </p>
                     </div>
@@ -94,14 +94,14 @@ export default function ClientFeedbackForm() {
                     )}
 
                     {/* Form */}
-                    <form onSubmit={handleSubmit} className="space-y-6 bg-gray-900/50 p-8 rounded-2xl border border-gray-800">
+                    <form onSubmit={handleSubmit} className="space-y-6 bg-deep-navy-black/50 p-8 rounded-2xl border border-deep-navy-black">
 
                         {/* Business Information */}
                         <div className="space-y-4">
-                            <h2 className="text-2xl font-bold text-[#00D2FF] mb-4">Your Business Information</h2>
+                            <h2 className="text-2xl font-bold text-electric-cyan mb-4">Your Business Information</h2>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                     Business Name <span className="text-red-400">*</span>
                                 </label>
                                 <input
@@ -110,13 +110,13 @@ export default function ClientFeedbackForm() {
                                     value={formData.businessName}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                    className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                     placeholder="Your company name"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                     Contact Person <span className="text-red-400">*</span>
                                 </label>
                                 <input
@@ -125,14 +125,14 @@ export default function ClientFeedbackForm() {
                                     value={formData.contactPerson}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                    className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                     placeholder="Your name"
                                 />
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                    <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                         Email <span className="text-red-400">*</span>
                                     </label>
                                     <input
@@ -141,13 +141,13 @@ export default function ClientFeedbackForm() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                        className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                         placeholder="your@email.com"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                    <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                         Phone/WhatsApp <span className="text-red-400">*</span>
                                     </label>
                                     <input
@@ -156,7 +156,7 @@ export default function ClientFeedbackForm() {
                                         value={formData.phone}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                        className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                         placeholder="+880 1XXX-XXXXXX"
                                     />
                                 </div>
@@ -164,11 +164,11 @@ export default function ClientFeedbackForm() {
                         </div>
 
                         {/* Feedback Section */}
-                        <div className="space-y-4 pt-6 border-t border-gray-800">
-                            <h2 className="text-2xl font-bold text-[#00D2FF] mb-4">Your Feedback on Last Year's Support</h2>
+                        <div className="space-y-4 pt-6 border-t border-deep-navy-black">
+                            <h2 className="text-2xl font-bold text-electric-cyan mb-4">Your Feedback on Last Year's Support</h2>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                     Did you receive support from INSPIRON TECH last year? <span className="text-red-400">*</span>
                                 </label>
                                 <select
@@ -176,7 +176,7 @@ export default function ClientFeedbackForm() {
                                     value={formData.receivedSupport}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                    className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                 >
                                     <option value="">-- Select --</option>
                                     <option value="yes">Yes, I received support</option>
@@ -187,7 +187,7 @@ export default function ClientFeedbackForm() {
 
                             {formData.receivedSupport === 'yes' && (
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                    <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                         When and for what issues did you receive support?
                                     </label>
                                     <textarea
@@ -195,14 +195,14 @@ export default function ClientFeedbackForm() {
                                         value={formData.supportDetails}
                                         onChange={handleChange}
                                         rows={4}
-                                        className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                        className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                         placeholder="E.g., 'March 2025 — help with VAT reports setup, October 2025 — chart of accounts restructure'"
                                     />
                                 </div>
                             )}
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                     What support did you need but didn't receive?
                                 </label>
                                 <textarea
@@ -210,13 +210,13 @@ export default function ClientFeedbackForm() {
                                     value={formData.whatWasNotProvided}
                                     onChange={handleChange}
                                     rows={4}
-                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                    className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                     placeholder="E.g., 'Custom dashboard for inventory tracking, training for new staff members'"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                     What do you need help with now?
                                 </label>
                                 <textarea
@@ -224,13 +224,13 @@ export default function ClientFeedbackForm() {
                                     value={formData.whatYouNeed}
                                     onChange={handleChange}
                                     rows={4}
-                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                    className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                     placeholder="E.g., 'Better production tracking, automated Mushak 6.3 reports, multi-branch setup'"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                     How can I improve my service?
                                 </label>
                                 <textarea
@@ -238,18 +238,18 @@ export default function ClientFeedbackForm() {
                                     value={formData.improvementSuggestions}
                                     onChange={handleChange}
                                     rows={4}
-                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#00D2FF] text-white"
+                                    className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-electric-cyan text-white"
                                     placeholder="E.g., 'Faster response time, more training videos, monthly check-ins'"
                                 />
                             </div>
                         </div>
 
                         {/* Customization Requirements */}
-                        <div className="space-y-4 pt-6 border-t border-gray-800">
-                            <h2 className="text-2xl font-bold text-[#FFD700] mb-4">Customization Service Request</h2>
+                        <div className="space-y-4 pt-6 border-t border-deep-navy-black">
+                            <h2 className="text-2xl font-bold text-action-gold mb-4">Customization Service Request</h2>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                     Describe your customization requirements
                                 </label>
                                 <textarea
@@ -257,20 +257,20 @@ export default function ClientFeedbackForm() {
                                     value={formData.customizationRequirements}
                                     onChange={handleChange}
                                     rows={6}
-                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#FFD700] text-white"
+                                    className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-action-gold text-white"
                                     placeholder="E.g., 'Need a custom dashboard showing real-time sales by salesperson, automated bank reconciliation, production cost tracking per product'"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                                <label className="block text-sm font-semibold text-institutional-white/80 mb-2">
                                     Your budget range (optional)
                                 </label>
                                 <select
                                     name="budget"
                                     value={formData.budget}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-[#FFD700] text-white"
+                                    className="w-full px-4 py-3 bg-navy border border-navy rounded-lg focus:outline-none focus:border-action-gold text-white"
                                 >
                                     <option value="">-- Select --</option>
                                     <option value="5k-15k">BDT 5,000 - 15,000</option>
@@ -285,14 +285,14 @@ export default function ClientFeedbackForm() {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full py-4 bg-gradient-to-r from-[#FFD700] to-[#FFC700] text-[#010409] font-bold text-lg rounded-lg hover:from-[#FFC700] hover:to-[#FFD700] transition-all duration-300 transform hover:scale-[1.02]"
+                            className="w-full py-4 bg-gradient-to-r from-action-gold to-action-gold-dark text-deep-navy-black font-bold text-lg rounded-lg hover:from-action-gold-dark hover:to-action-gold transition-all duration-300 transform hover:scale-[1.02]"
                         >
                             Submit Feedback & Request
                         </button>
                     </form>
 
                     {/* Footer Note */}
-                    <p className="text-center text-sm text-gray-500 mt-8">
+                    <p className="text-center text-sm text-institutional-white/60 mt-8">
                         Your information is confidential. We'll respond within 24 hours with a custom proposal.
                     </p>
                 </div>

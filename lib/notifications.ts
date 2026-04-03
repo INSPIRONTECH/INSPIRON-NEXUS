@@ -45,7 +45,7 @@ export async function notifyWhatsApp(message: string): Promise<void> {
     }
 
     try {
-        const res = await fetch(`https://graph.facebook.com/v18.0/${phoneId}/messages`, {
+        const res = await fetch(`https://graph.facebook.com/v21.0/${phoneId}/messages`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,
